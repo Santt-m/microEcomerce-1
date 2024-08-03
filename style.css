@@ -3,7 +3,7 @@
 
 /* clases header */
 @import url(/assets/header/header.css);
-
+@import url(/assets/nav/nav.css);
 /* cascada de index */
 @import url(/assets/index/index.css);
 
@@ -15,24 +15,30 @@
 @import url(./assets/footer/footer.css);
 
 
+/* fonts */
+
+/* roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 /* root */
 :root {
+    /* standard */
+    --bodycolor: #000;
+    --bodybackgroundcolor: #fff;
+
     /* medidas estandar */
     --std-borderRadius: 25px;
-    --std-letterSpacing: 2px;
+    --std-letterSpacing: 1.5px;
     --std-fontColor: white;
 
+    --std-btnHoverColor: rgb(44, 42, 42);
+    --std-btnHoverBackgroundColor: rgba(128, 128, 128, 0.178);
     /* paleta de colores */
 
     --primary-color: #42b883;
     --secondary-color: #347474;
     --third-color: #1c1e21;
-    --quaternary-color: #ff7e67;
-
-    /* standard */
-    --bodycolor: #000;
-    --bodybackgroundcolor: #fff;
-
+    --quaternary-color: #05830f;
 }
 
 /* estandar style */
@@ -59,4 +65,3 @@ body {
     font-weight: 400;
     font-style: normal;
 }
-

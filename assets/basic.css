@@ -1,8 +1,10 @@
+/* animaciones */
+@import url(./anim.css);
+
 
 /* posicionamiento */
 
 /* ancho */
-.w100{width: 100%;}
 
 
 /* flexbox */
