@@ -1,0 +1,62 @@
+/* Clases basicas generales */
+@import url(./assets/basic.css);
+
+/* clases header */
+@import url(/assets/header/header.css);
+
+/* cascada de index */
+@import url(/assets/index/index.css);
+
+
+/* import carrito styles */
+@import url(./assets/cart/cart.css);
+
+/* clases footer */
+@import url(./assets/footer/footer.css);
+
+
+/* root */
+:root {
+    /* medidas estandar */
+    --std-borderRadius: 25px;
+    --std-letterSpacing: 2px;
+    --std-fontColor: white;
+
+    /* paleta de colores */
+
+    --primary-color: #42b883;
+    --secondary-color: #347474;
+    --third-color: #1c1e21;
+    --quaternary-color: #ff7e67;
+
+    /* standard */
+    --bodycolor: #000;
+    --bodybackgroundcolor: #fff;
+
+}
+
+/* estandar style */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: var(--bodycolor);
+    background-color: var(--bodybackgroundcolor);
+
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+

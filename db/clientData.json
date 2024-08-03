@@ -1,0 +1,26 @@
+{
+  "nombreEmpresa": "Nombre de la Empresa",
+  "descripcion": "Descripción de la empresa.",
+  "direccion": "Dirección de la empresa",
+  "urlGoogleMaps": "https://www.google.com/maps/place/Direccion+de+la+empresa",
+  "urlInstagram": "https://www.instagram.com/nombre_de_la_empresa/",
+  "urlFacebook": "https://www.facebook.com/nombre_de_la_empresa/",
+  "urlTwitter": "https://twitter.com/nombre_de_la_empresa",
+  "telefono": "123-456-7890",
+  "whatsapp": "123-456-7890",
+  "horariosLocal": [
+    { "dia": "Lunes", "horario": "10:00 - 23:00" },
+    { "dia": "Martes", "horario": "10:00 - 22:00" },
+    { "dia": "Miércoles", "horario": "10:00 - 22:00" },
+    { "dia": "Jueves", "horario": "10:00 - 22:00" },
+    { "dia": "Viernes", "horario": "10:00 - 22:00" },
+    { "dia": "Sábado", "horario": "10:00 - 22:00" },
+    { "dia": "Domingo", "horario": "10:00 - 22:00" }
+  ],
+  "horariosEnvio": [
+    { "dia": "Lunes", "horario": "10:00 - 23:00" },
+    { "dia": "Martes", "horario": "13:00 - 15:00" },
+    { "dia": "Miércoles", "horario": "16:00 - 18:00" },
+    { "dia": "Jueves", "horario": "19:00 - 21:00" }
+  ]
+}
