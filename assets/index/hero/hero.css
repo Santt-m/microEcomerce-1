@@ -1,0 +1,29 @@
+#hero{
+    width: 100%;
+    height: 50vh;
+
+    background-image: url(./img0.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+#hero .hero-desc{
+    width: 95%;
+    height: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--std-borderRadius);
+    box-shadow: var(--std-box-shadow);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--bodybackgroundcolor);
+}

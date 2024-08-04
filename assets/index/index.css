@@ -1,0 +1,8 @@
+/* import hero */
+@import url(./hero/hero.css);
+
+/* import products */
+@import url(./products/products.css);
+
+/* import promos */
+@import url(./promos/promos.css);

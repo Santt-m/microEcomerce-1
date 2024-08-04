@@ -6,11 +6,10 @@ nav {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-
+    z-index: 100;
     background-color: var(--bodybackgroundcolor);
 
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.452);
-
 }
 
 nav a {

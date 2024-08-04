@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,11 @@
 
     <title>Document</title>
 </head>
+
 <body>
     <header>
-        <a class="headerLogo" href="./index.html" title="ir a inicio"><img src="./assets/header/logo.jpeg" alt="logo del comercio"></a>
+        <a class="headerLogo" href="./index.html" title="ir a inicio"><img src="./assets/header/logo.jpeg"
+                alt="logo del comercio"></a>
         <div class="btn-nav">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -25,9 +28,36 @@
     </header>
     <main>
         <section id="hero">
-            
+            <div class="hero-desc">
+                <h1>***</h1>
+                <p>***</p>
+                <p id="direccion"></p>
+                <p id="telefono"></p>
+                <p id="whatsapp"></p>
+                <a id="google-maps" href="" target="_blank">Ver en Google Maps</a>
+            </div>
         </section>
+
+        <section id="promos">
+        </section>
+
+        <section id="productos">
+            <div id="filtros">
+                <button id="ver-todos">Ver Todos</button>
+                <div id="filters-container"></div>
+            </div>
+            <div id="productos-container"></div>
+        </section>
+
+        <section id="carrito">
+            <h2>Carrito de Compras</h2>
+            <ul id="carrito-items"></ul>
+            <p>Total: $<span id="total"></span></p>
+            <button id="vaciar-carrito">Vaciar Carrito</button>
+        </section>
+
     </main>
 </body>
-<script type="module" src="./index.js"></script>
+<script type="module" src="./app.js"></script>
+
 </html>
