@@ -14,6 +14,8 @@
 /* clases footer */
 @import url(./assets/footer/footer.css);
 
+/* style de js */
+@import url(./assets/css/js.css);
 
 /* fonts */
 
@@ -75,4 +77,27 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* anim de scroll */
+
+@keyframes show{
+    from{
+        opacity: 0;
+        scale: 25%;
+    }
+    to{
+        opacity: 1;
+        scale: 100%;
+    }
+}
+
+section div li{
+    view-timeline-name: --image;
+    view-timeline-axis: block;
+    animation-timeline: --image;
+    animation-name: show;
+
+    animation-range: entry 10% cover 20%;
+    animation-fill-mode: both;
 }

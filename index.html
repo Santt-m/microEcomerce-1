@@ -25,6 +25,90 @@
             <a href="" title="Productos">Productos</a>
             <a href="" title="Nosotros">Nosotros</a>
         </nav>
+        <div class="btn-cart">
+            <img src="./assets/cart/cart-shopping-solid.svg" alt="carrito boton">
+        </div>
+        <div class="cart-cont">
+            <section class="cart-header">
+                <!-- cabecera del carrito -->
+                <!-- botones para mostrar carrito (activo por defecto), mostrar datos cliente, mostrar pagar -->
+                <button id="show-cart" class="active">Carrito</button>
+                <button id="show-client">Datos Cliente</button>
+                <button id="show-pay">Pagar</button>
+            </section>
+            <section class="cart-items active">
+                <!-- section carrito -->
+                <ol id="cart-item">
+                    <!-- render de items en el carrito -->
+                </ol>
+            </section>
+            <section class="cart-client">
+                <!-- section de datos del cliente -->
+                <form id="client-info">
+                    <!-- formulario de datos del cliente -->
+                    <label for="first-name">Nombre:</label>
+                    <input type="text" id="first-name" name="first-name" required>
+            
+                    <label for="last-name">Apellido:</label>
+                    <input type="text" id="last-name" name="last-name" required>
+            
+                    <label for="phone-number">Número de Teléfono:</label>
+                    <input type="tel" id="phone-number" name="phone-number" required>
+            
+                    <!-- opcion de elegir de retirar en el local o envio -->
+                    <div>
+                        <input type="radio" id="pickup" name="delivery-option" value="pickup" checked>
+                        <label for="pickup">Retirar en el local</label>
+            
+                        <input type="radio" id="delivery" name="delivery-option" value="delivery">
+                        <label for="delivery">Envío a domicilio</label>
+                    </div>
+                </form>
+                <!-- si es envio mostrar el siguiente formulario -->
+                <form id="delivery-info" class="hidden">
+                    <!-- formulario de envio -->
+                    <label for="address">Dirección:</label>
+                    <input type="text" id="address" name="address" required>
+            
+                    <label for="address-number">Numeración:</label>
+                    <input type="text" id="address-number" name="address-number" required>
+            
+                    <div>
+                        <input type="radio" id="house" name="address-type" value="house" checked>
+                        <label for="house">Casa</label>
+            
+                        <input type="radio" id="apartment" name="address-type" value="apartment">
+                        <label for="apartment">Departamento</label>
+                    </div>
+            
+                    <div id="apartment-info" class="hidden">
+                        <label for="floor">Piso:</label>
+                        <input type="text" id="floor" name="floor">
+            
+                        <label for="apartment-number">Número de Depto.:</label>
+                        <input type="text" id="apartment-number" name="apartment-number">
+                    </div>
+                </form>
+                <button id="save-client-info">Guardar Información</button>
+                <p id="save-message"></p>
+            </section>
+            
+            <section class="cart-pay">
+                <ol id="pay-ticket">
+                    <!-- lista de productos en formato ticket solo texto y detallado -->
+                </ol>
+                <div id="shipping-cost">
+                    <!-- ticket costo de envio -->
+                </div>
+                <div id="total-cost">
+                    <!-- total a cobrar -->
+                </div>
+                <!-- por ahora solo dos botones sin acciones -->
+                <button id="confirm-order">Confirmar Pedido</button>
+                <button id="cancel-order">Cancelar Pedido</button>
+            </section>
+        </div>
+        
     </header>
     <main>
         <section id="hero">
@@ -37,25 +121,44 @@
                 <a id="google-maps" href="" target="_blank">Ver en Google Maps</a>
             </div>
         </section>
-
         <section id="promos">
+            <h2>Productos en Promoción</h2>
+            <ol id="promos-container"></ol>
         </section>
-
         <section id="productos">
             <div id="filtros">
                 <button id="ver-todos">Ver Todos</button>
                 <ol id="filters-container"></ol>
+                <input type="text" id="search" placeholder="Buscar productos...">
+                <button id="ver-price-filters">Filtros de Precio</button>
+                <div id="price-filters" class="slideDown">
+                    <label for="min-price">Precio Mínimo: </label>
+                    <input type="number" id="min-price" placeholder="0">
+                    <label for="max-price">Precio Máximo: </label>
+                    <input type="number" id="max-price" placeholder="10000">
+                    <button id="filter-price">Filtrar por precio</button>
+                </div>
             </div>
             <ol id="productos-container"></ol>
+            <button id="ver-mas-productos" style="display: none;">Ver Más</button>
         </section>
-
-        <section id="carrito">
-            <h2>Carrito de Compras</h2>
-            <ul id="carrito-items"></ul>
-            <p>Total: $<span id="total"></span></p>
-            <button id="vaciar-carrito">Vaciar Carrito</button>
+        <section id="bebidas">
+            <div id="filtros-bebidas">
+                <button id="ver-todos-bebidas">Ver Todas</button>
+                <ol id="filters-container-bebidas"></ol>
+                <input type="text" id="search-bebidas" placeholder="Buscar bebidas...">
+                <button id="ver-price-filters-bebidas">Filtros de Precio</button>
+                <div id="price-filters-bebidas" class="slideDown">
+                    <label for="min-price-bebidas">Precio Mínimo: </label>
+                    <input type="number" id="min-price-bebidas" placeholder="0">
+                    <label for="max-price-bebidas">Precio Máximo: </label>
+                    <input type="number" id="max-price-bebidas" placeholder="10000">
+                    <button id="filter-price-bebidas">Filtrar por precio</button>
+                </div>
+            </div>
+            <ol id="bebidas-container"></ol>
+            <button id="ver-mas-bebidas" style="display: none;">Ver Más</button>
         </section>
-
     </main>
 </body>
 <script type="module" src="./app.js"></script>

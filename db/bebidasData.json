@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "tag": ["Refrescos"],
+      "name": "Coca Cola",
+      "description": "Refresco de cola.",
+      "price": 1500,
+      "image": "../db/bebidasData/1/img0.jpg",
+      "promo": true,
+      "alcoholic": false
+    },
+    {
+      "id": 2,
+      "tag": ["Refrescos"],
+      "name": "Pepsi",
+      "description": "Refresco de cola.",
+      "price": 1400,
+      "image": "../db/bebidasData/2/img0.jpg",
+      "promo": false,
+      "alcoholic": false
+    },
+    {
+      "id": 3,
+      "tag": ["Cerveza"],
+      "name": "Corona",
+      "description": "Cerveza rubia mexicana.",
+      "price": 3000,
+      "image": "../db/bebidasData/3/img0.jpg",
+      "promo": true,
+      "alcoholic": true
+    },
+    {
+      "id": 4,
+      "tag": ["Cerveza"],
+      "name": "Heineken",
+      "description": "Cerveza rubia holandesa.",
+      "price": 3500,
+      "image": "../db/bebidasData/4/img0.jpg",
+      "promo": false,
+      "alcoholic": true
+    },
+    {
+      "id": 5,
+      "tag": ["Jugos"],
+      "name": "Jugo de Naranja",
+      "description": "Jugo natural de naranja.",
+      "price": 2000,
+      "image": "../db/bebidasData/5/img0.jpg",
+      "promo": true,
+      "alcoholic": false
+    }
+  ]
+  

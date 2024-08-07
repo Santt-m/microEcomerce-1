@@ -3,6 +3,10 @@
 
 /* import products */
 @import url(./products/products.css);
+@import url(./products/filters.css);
 
 /* import promos */
 @import url(./promos/promos.css);
+
+/* import bebidas */
+@import url(./bebidas/bebidas.css);

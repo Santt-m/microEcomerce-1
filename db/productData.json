@@ -5,7 +5,8 @@
     "name": "Brochetas",
     "description": "Contiene rúcula, queso, tomate cherry, orégano",
     "price": 2000,
-    "image": "../db/productsData/1/img0.jpg"
+    "image": "../db/productsData/1/img0.jpg",
+    "promo": true
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "name": "Ñoquis de espinaca",
     "description": "",
     "price": 3000,
-    "image": "../db/productsData/2/img0.jpg"
+    "image": "../db/productsData/2/img0.jpg",
+    "promo": false
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "name": "Ñoquis de remolacha",
     "description": "",
     "price": 3000,
-    "image": "../db/productsData/3/img0.jpg"
+    "image": "../db/productsData/3/img0.jpg",
+    "promo": false
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "name": "Tarta de verdura",
     "description": "Tarta de verdura con masa casera y queso gratinado. Hecha con acelga, huevo, cebolla, queso gratinado, pimientos y especias surtidas.",
     "price": 7000,
-    "image": "../db/productsData/4/img0.jpg"
+    "image": "../db/productsData/4/img0.jpg",
+    "promo": true
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "name": "Aros de cebolla",
     "description": "",
     "price": 3000,
-    "image": "../db/productsData/5/img0.jpg"
+    "image": "../db/productsData/5/img0.jpg",
+    "promo": false
   },
   {
     "id": 6,
@@ -45,7 +50,8 @@
     "name": "Papas fritas",
     "description": "",
     "price": 3000,
-    "image": "../db/productsData/6/img0.jpg"
+    "image": "../db/productsData/6/img0.jpg",
+    "promo": false
   },
   {
     "id": 7,
@@ -53,7 +59,8 @@
     "name": "Tarta Frutal individual",
     "description": "",
     "price": 4700,
-    "image": "../db/productsData/7/img0.jpg"
+    "image": "../db/productsData/7/img0.jpg",
+    "promo": true
   },
   {
     "id": 8,
@@ -61,7 +68,8 @@
     "name": "Tarta Frutal Grande",
     "description": "",
     "price": 9000,
-    "image": "../db/productsData/8/img0.jpg"
+    "image": "../db/productsData/8/img0.jpg",
+    "promo": false
   },
   {
     "id": 9,
@@ -69,7 +77,8 @@
     "name": "Tarta Frutal Mediana",
     "description": "",
     "price": 7000,
-    "image": "../db/productsData/9/img0.jpg"
+    "image": "../db/productsData/9/img0.jpg",
+    "promo": false
   },
   {
     "id": 10,
@@ -77,7 +86,8 @@
     "name": "Pasta Frola grande",
     "description": "",
     "price": 8000,
-    "image": "../db/productsData/10/img0.jpg"
+    "image": "../db/productsData/10/img0.jpg",
+    "promo": true
   },
   {
     "id": 11,
@@ -85,7 +95,8 @@
     "name": "Pasta Frola chica",
     "description": "",
     "price": 4500,
-    "image": "../db/productsData/11/img0.jpg"
+    "image": "../db/productsData/11/img0.jpg",
+    "promo": false
   },
   {
     "id": 12,
@@ -93,7 +104,8 @@
     "name": "Pasta Frola grande",
     "description": "",
     "price": 8000,
-    "image": "../db/productsData/12/img0.jpg"
+    "image": "../db/productsData/12/img0.jpg",
+    "promo": false
   },
   {
     "id": 13,
@@ -101,6 +113,7 @@
     "name": "Tarta de ricota chica",
     "description": "",
     "price": 3500,
-    "image": "../db/productsData/13/img0.jpg"
+    "image": "../db/productsData/13/img0.jpg",
+    "promo": false
   }
 ]

@@ -1,3 +1,4 @@
+
 #productos{
     width: 100%;
 
@@ -14,12 +15,11 @@
     justify-content: center;
     gap: 20px;
     list-style-type: none;
-    padding: 0;
 }
 
 #productos-container li {
-    width: 100%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 300px;
     padding: 20px;
 
     border: 1px solid #ccc;
@@ -52,3 +52,32 @@
     font-weight: bold;
     color: #000;
 }
+
+/* Botones Ver Más */
+
+#ver-mas-productos,
+#ver-mas-bebidas {
+    width: 150px;
+    height: 50px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+    text-align: center;
+}
+
+#ver-mas-productos:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#ver-mas-productos:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+

@@ -1,0 +1,110 @@
+/* boton abrir carrito */
+.btn-cart {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.cart-cont {
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    width: 300px;
+    height: 90vh;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1000;
+    overflow-y: auto; /* Scroll en eje y */
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-header button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-header button.active {
+    background-color: #0056b3;
+}
+
+.cart-items, .cart-client, .cart-pay {
+    padding: 20px;
+    display: none;
+    overflow-y: auto; /* Scroll en eje y */
+    flex: 1 1 auto; /* Permite que las secciones crezcan */
+}
+
+.cart-items.active, .cart-client.active, .cart-pay.active {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    margin-top: 10px;
+}
+
+form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form div {
+    margin-top: 10px;
+}
+
+#delivery-info.hidden, #apartment-info.hidden {
+    display: none;
+}
+
+#pay-ticket, #shipping-cost, #total-cost {
+    margin: 10px 0;
+}
+
+/* boton de guardar info del cliente */
+
+#save-client-info {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#save-client-info:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+#save-client-info:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(40,167,69,0.5);
+}
+
+#save-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: green;
+}
