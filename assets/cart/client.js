@@ -34,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveClientInfoBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        saveClientInfo();
-    });
-
-    function saveClientInfo() {
         const clientInfo = {
             firstName: sanitizeInput(document.getElementById('first-name').value),
             lastName: sanitizeInput(document.getElementById('last-name').value),
@@ -58,43 +54,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const validation = validateClientInfo(clientInfo);
         if (validation.isValid) {
-            localStorage.setItem('clientInfo', JSON.stringify(clientInfo));
-            console.log('Información del cliente guardada:', clientInfo);
+            const sanitizedClientInfo = sanitizeData(clientInfo);
+            localStorage.setItem('clientInfo', JSON.stringify(sanitizedClientInfo));
+            console.log('Información del cliente guardada:', sanitizedClientInfo);
             showSaveMessage('Información guardada exitosamente', 'green');
         } else {
             console.error('Error: Información inválida');
             showSaveMessage(validation.message, 'red');
         }
-    }
-
-    function loadClientInfo() {
-        const storedClientInfo = localStorage.getItem('clientInfo');
-        if (storedClientInfo) {
-            const clientInfo = JSON.parse(storedClientInfo);
-            document.getElementById('first-name').value = clientInfo.firstName;
-            document.getElementById('last-name').value = clientInfo.lastName;
-            document.getElementById('phone-number').value = clientInfo.phoneNumber;
-            document.querySelector(`input[name="delivery-option"][value="${clientInfo.deliveryOption}"]`).checked = true;
-
-            if (clientInfo.deliveryOption === 'delivery') {
-                deliveryInfoForm.classList.remove('hidden');
-                document.getElementById('address').value = clientInfo.address;
-                document.getElementById('address-number').value = clientInfo.addressNumber;
-                document.querySelector(`input[name="address-type"][value="${clientInfo.addressType}"]`).checked = true;
-
-                if (clientInfo.addressType === 'apartment') {
-                    apartmentInfo.classList.remove('hidden');
-                    document.getElementById('floor').value = clientInfo.floor;
-                    document.getElementById('apartment-number').value = clientInfo.apartmentNumber;
-                }
-            }
-        }
-    }
+    });
 
     function sanitizeInput(input) {
         const element = document.createElement('div');
         element.innerText = input;
-        return element.innerHTML;
+        return element.innerHTML.trim();
+    }
+
+    function sanitizeData(data) {
+        const sanitizedData = { ...data };
+        for (const key in sanitizedData) {
+            if (typeof sanitizedData[key] === 'string') {
+                sanitizedData[key] = sanitizedData[key].replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+        }
+        return sanitizedData;
     }
 
     function validateClientInfo(clientInfo) {
@@ -142,5 +125,31 @@ document.addEventListener('DOMContentLoaded', () => {
         section.classList.add('active');
     }
 
+    function loadClientInfo() {
+        const storedClientInfo = localStorage.getItem('clientInfo');
+        if (storedClientInfo) {
+            const clientInfo = JSON.parse(storedClientInfo);
+            const sanitizedClientInfo = sanitizeData(clientInfo);
+            document.getElementById('first-name').value = sanitizedClientInfo.firstName;
+            document.getElementById('last-name').value = sanitizedClientInfo.lastName;
+            document.getElementById('phone-number').value = sanitizedClientInfo.phoneNumber;
+            document.querySelector(`input[name="delivery-option"][value="${sanitizedClientInfo.deliveryOption}"]`).checked = true;
+
+            if (sanitizedClientInfo.deliveryOption === 'delivery') {
+                deliveryInfoForm.classList.remove('hidden');
+                document.getElementById('address').value = sanitizedClientInfo.address;
+                document.getElementById('address-number').value = sanitizedClientInfo.addressNumber;
+                document.querySelector(`input[name="address-type"][value="${sanitizedClientInfo.addressType}"]`).checked = true;
+
+                if (sanitizedClientInfo.addressType === 'apartment') {
+                    apartmentInfo.classList.remove('hidden');
+                    document.getElementById('floor').value = sanitizedClientInfo.floor;
+                    document.getElementById('apartment-number').value = sanitizedClientInfo.apartmentNumber;
+                }
+            }
+        }
+    }
+
     loadClientInfo();
 });
+

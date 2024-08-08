@@ -1,0 +1,43 @@
+.cart-pay {
+    display: none;
+    width: 100%;
+}
+
+.cart-pay.active {
+    display: block;
+}
+
+#pay-ticket, #shipping-cost, #total-cost {
+    margin: 10px 0;
+}
+
+/* Estilos para los botones de pago */
+#confirm-order, #cancel-order {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#confirm-order:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#cancel-order {
+    background-color: #dc3545;
+}
+
+#cancel-order:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+#confirm-order:focus, #cancel-order:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}

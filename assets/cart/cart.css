@@ -1,3 +1,6 @@
+@import url(./client.css);
+@import url(./payment.css);
+
 /* boton abrir carrito */
 .btn-cart {
     width: 30px;
@@ -6,105 +9,139 @@
     cursor: pointer;
 }
 
+/* Estilos generales del carrito */
 .cart-cont {
-    position: fixed;
-    top: 10vh;
-    right: 0;
-    width: 300px;
-    height: 90vh;
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 80vh;
+    min-width: 300px;
+    max-width: 450px;
+    padding: 20px;
+
+    position: absolute;
+    top: 11vh;
+    right: 10px;
+
     display: none;
     flex-direction: column;
-    justify-content: space-between;
-    z-index: 1000;
-    overflow-y: auto; /* Scroll en eje y */
+    align-items: center;
+    justify-content: flex-start;
+
+    background-color: #f8f8f8;
+    
+    border: var(--std-borderColor);
+    border-radius: var(--std-borderRadius);
+    box-shadow: var(--std-box-shadow);
 }
 
 .cart-header {
     display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .cart-header button {
-    background-color: #007BFF;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .cart-header button.active {
     background-color: #0056b3;
 }
 
-.cart-items, .cart-client, .cart-pay {
-    padding: 20px;
-    display: none;
-    overflow-y: auto; /* Scroll en eje y */
-    flex: 1 1 auto; /* Permite que las secciones crezcan */
+.cart-header button:hover {
+    background-color: #0056b3;
 }
 
-.cart-items.active, .cart-client.active, .cart-pay.active {
+.cart-items {
+    display: none;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.cart-items.active {
     display: block;
 }
 
-form {
+#cart-item {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+#cart-item li {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+#cart-item img{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 
-form label {
-    margin-top: 10px;
-}
-
-form input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form div {
-    margin-top: 10px;
-}
-
-#delivery-info.hidden, #apartment-info.hidden {
-    display: none;
-}
-
-#pay-ticket, #shipping-cost, #total-cost {
-    margin: 10px 0;
-}
-
-/* boton de guardar info del cliente */
-
-#save-client-info {
-    background-color: #28a745;
-    color: white;
+#cart-item li button {
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-#save-client-info:hover {
+#cart-item li button:hover {
+    background-color: #0056b3;
+}
+
+#cart-item li .remove-from-cart {
+    background-color: #dc3545;
+}
+
+#cart-item li .remove-from-cart:hover {
+    background-color: #c82333;
+}
+
+/* Estilos específicos para los botones de cantidad */
+.quantity-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-controls button:hover {
+    background-color: #0056b3;
+}
+
+.quantity-controls .remove-one {
+    background-color: #ffc107;
+}
+
+.quantity-controls .remove-one:hover {
+    background-color: #e0a800;
+}
+
+.quantity-controls .add-to-cart {
+    background-color: #28a745;
+}
+
+.quantity-controls .add-to-cart:hover {
     background-color: #218838;
-    transform: scale(1.05);
-}
-
-#save-client-info:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(40,167,69,0.5);
-}
-
-#save-message {
-    margin-top: 10px;
-    font-size: 14px;
-    color: green;
 }
