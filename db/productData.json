@@ -3,7 +3,7 @@
     "id": 1,
     "tag": ["Brochetas"],
     "name": "Brochetas",
-    "description": "Contiene rúcula, queso, tomate cherry, orégano",
+    "description": "Brochetas frescas con rúcula, queso y tomate cherry, sazonadas con orégano. Perfectas para un bocado saludable.",
     "price": 2000,
     "image": "../db/productsData/1/img0.jpg",
     "promo": true
@@ -12,7 +12,7 @@
     "id": 2,
     "tag": ["Pastas"],
     "name": "Ñoquis de espinaca",
-    "description": "",
+    "description": "Ñoquis caseros hechos con espinaca fresca. Un plato lleno de sabor y nutrientes.",
     "price": 3000,
     "image": "../db/productsData/2/img0.jpg",
     "promo": false
@@ -21,7 +21,7 @@
     "id": 3,
     "tag": ["Pastas"],
     "name": "Ñoquis de remolacha",
-    "description": "",
+    "description": "Ñoquis de remolacha, suaves y coloridos, con un toque dulce y terroso. ¡Ideal para algo diferente!",
     "price": 3000,
     "image": "../db/productsData/3/img0.jpg",
     "promo": false
@@ -30,7 +30,7 @@
     "id": 4,
     "tag": ["Tartas"],
     "name": "Tarta de verdura",
-    "description": "Tarta de verdura con masa casera y queso gratinado. Hecha con acelga, huevo, cebolla, queso gratinado, pimientos y especias surtidas.",
+    "description": "Tarta de verdura con masa casera, queso gratinado y una mezcla de acelga, cebolla y pimientos.",
     "price": 7000,
     "image": "../db/productsData/4/img0.jpg",
     "promo": true
@@ -39,7 +39,7 @@
     "id": 5,
     "tag": [],
     "name": "Aros de cebolla",
-    "description": "",
+    "description": "Crocantes aros de cebolla, fritos a la perfección. Un snack irresistible.",
     "price": 3000,
     "image": "../db/productsData/5/img0.jpg",
     "promo": false
@@ -48,7 +48,7 @@
     "id": 6,
     "tag": ["Entradas"],
     "name": "Papas fritas",
-    "description": "",
+    "description": "Papas fritas doradas y crujientes. El acompañamiento perfecto para cualquier comida.",
     "price": 3000,
     "image": "../db/productsData/6/img0.jpg",
     "promo": false
@@ -57,7 +57,7 @@
     "id": 7,
     "tag": ["Postres"],
     "name": "Tarta Frutal individual",
-    "description": "",
+    "description": "Tarta frutal individual con una base crujiente y un relleno cremoso, decorada con frutas frescas.",
     "price": 4700,
     "image": "../db/productsData/7/img0.jpg",
     "promo": true
@@ -66,7 +66,7 @@
     "id": 8,
     "tag": ["Postres"],
     "name": "Tarta Frutal Grande",
-    "description": "",
+    "description": "Tarta frutal grande, ideal para compartir, con frutas frescas y una base crujiente.",
     "price": 9000,
     "image": "../db/productsData/8/img0.jpg",
     "promo": false
@@ -75,7 +75,7 @@
     "id": 9,
     "tag": ["Postres"],
     "name": "Tarta Frutal Mediana",
-    "description": "",
+    "description": "Tarta frutal mediana, equilibrada en tamaño y sabor, con una mezcla de frutas frescas.",
     "price": 7000,
     "image": "../db/productsData/9/img0.jpg",
     "promo": false
@@ -84,7 +84,7 @@
     "id": 10,
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
-    "description": "",
+    "description": "Pasta Frola grande con dulce de membrillo y una masa suave. Un clásico irresistible.",
     "price": 8000,
     "image": "../db/productsData/10/img0.jpg",
     "promo": true
@@ -93,7 +93,7 @@
     "id": 11,
     "tag": ["Postres"],
     "name": "Pasta Frola chica",
-    "description": "",
+    "description": "Pasta Frola chica con dulce de membrillo, perfecta para un postre individual.",
     "price": 4500,
     "image": "../db/productsData/11/img0.jpg",
     "promo": false
@@ -102,7 +102,7 @@
     "id": 12,
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
-    "description": "",
+    "description": "Pasta Frola grande con masa casera y relleno de dulce de membrillo. Ideal para compartir.",
     "price": 8000,
     "image": "../db/productsData/12/img0.jpg",
     "promo": false
@@ -111,7 +111,7 @@
     "id": 13,
     "tag": ["Postres"],
     "name": "Tarta de ricota chica",
-    "description": "",
+    "description": "Tarta de ricota chica, suave y cremosa, con un toque de limón. Perfecta para un bocado dulce.",
     "price": 3500,
     "image": "../db/productsData/13/img0.jpg",
     "promo": false

@@ -11,22 +11,6 @@
     margin-bottom: 20px;
 }
 
-#bebidas-container {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    list-style-type: none;
-}
-
-#bebidas-container li {
-    width: calc(25% - 20px);
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
 
 #bebidas-container li:hover {
     transform: scale(1.05);
@@ -201,8 +185,7 @@
 
 
 #bebidas-container li {
-    width: 90%;
-    max-width: 100px;
+    width: 150px;
     height: 300px;
     padding: 5px;
 
@@ -226,7 +209,7 @@
 }
 
 #bebidas-container img {
-    width: 50px;
+    width: auto;
     height: 150px;
     border-radius: 10px;
 }

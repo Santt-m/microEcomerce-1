@@ -1,6 +1,6 @@
 #hero{
     width: 100%;
-    height: 50vh;
+    min-height: 50vh;
 
     background-image: url(./img0.webp);
     background-repeat: no-repeat;
@@ -8,14 +8,18 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     justify-content: end;
 }
 
 #hero .hero-desc{
     width: 95%;
+    max-width: 500px;
     height: 50%;
+    max-height: 500px;
     padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
     margin-bottom: 10px;
     border-radius: var(--std-borderRadius);
     box-shadow: var(--std-box-shadow);
@@ -26,4 +30,179 @@
     justify-content: space-between;
 
     background-color: var(--bodybackgroundcolor);
+}
+
+.hero-cont{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.hero-cont-img{
+    width: 40%;
+    height: 100%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+.hero-cont-img img{
+    width: 100%;
+    height: 100%;
+    max-width: 150px;
+
+    border-radius: var(--std-borderRadius);
+}
+
+.hero-cont-info{
+    width: 60%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+
+    gap: 5px;
+}
+
+#horarios-container {
+    width: 100%;
+
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+#horarios-local, #horarios-envio {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Colores para los estados */
+.estado-abierto {
+    color: green;
+    font-weight: bold;
+}
+
+.estado-cerrado {
+    color: red;
+    font-weight: bold;
+}
+
+.estado-pronto-cerrar {
+    color: orange;
+    font-weight: bold;
+}
+
+
+/* Colores para los estados */
+.estado-abierto {
+    color: green;
+    font-weight: bold;
+}
+
+.estado-cerrado {
+    color: red;
+    font-weight: bold;
+}
+
+.estado-pronto-cerrar {
+    color: orange;
+    font-weight: bold;
+}
+
+
+/* Contenedor de los botones de contacto */
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+/* Estilos base para todos los botones de contacto */
+.btn-contact {
+    padding: 8px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-contact:hover {
+    letter-spacing: .8px;
+    box-shadow: 0 8px 15px rgba(167, 179, 4, 0.3);
+}
+
+.btn-contact:active {
+    letter-spacing: 1.5px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* WhatsApp */
+.btn-whatsapp {
+    background-color: #25D366;
+    background-image: linear-gradient(45deg, #25D366, #128C7E);
+}
+
+.btn-whatsapp:hover {
+    background-color: #1EB954;
+}
+
+/* Google Maps */
+.btn-google-maps {
+    background-color: #4285F4;
+    background-image: linear-gradient(45deg, #4285F4, #2C79E8);
+}
+
+.btn-google-maps:hover {
+    background-color: #357AE8;
+}
+
+/* Instagram */
+.btn-instagram {
+    background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+}
+
+.btn-instagram:hover {
+    background: linear-gradient(45deg, #E44D26, #BD2D6A, #70288C, #4142C9);
+}
+
+/* Facebook */
+.btn-facebook {
+    background-color: #3b5998;
+    background-image: linear-gradient(45deg, #3b5998, #2d4373);
+}
+
+.btn-facebook:hover {
+    background-color: #2d4373;
+}
+
+/* Twitter */
+.btn-twitter {
+    background-color: #1DA1F2;
+    background-image: linear-gradient(45deg, #1DA1F2, #0A95E0);
+}
+
+.btn-twitter:hover {
+    background-color: #0A95E0;
 }

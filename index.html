@@ -82,14 +82,27 @@
             <div class="hero-desc">
                 <h1>***</h1>
                 <p>***</p>
-                <p id="direccion"></p>
-                <p id="telefono"></p>
-                <p id="whatsapp"></p>
-                <a id="google-maps" href="" target="_blank">Ver en Google Maps</a>
+                <div class="hero-cont">
+                    <div class="hero-cont-img">
+                        <img src="./assets/index/hero/logo.jpeg" alt="Logo local">
+                    </div>
+                    <div class="hero-cont-info">
+                        <p id="direccion"></p>
+                        <p id="telefono"></p>
+                        
+                    </div>
+                    <div id="horarios-container">
+                        <select id="horarios-local"></select>
+                        <p id="estado-local"></p>
+                        <select id="horarios-envio"></select>
+                        <p id="estado-envio"></p>
+                        <div class="btn-container">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section id="promos">
-            <h2>Productos en Promoción</h2>
             <ol id="promos-container"></ol>
         </section>
         <section id="productos">
@@ -126,6 +139,34 @@
             <ol id="bebidas-container"></ol>
             <button id="ver-mas-bebidas" style="display: none;">Ver Más</button>
         </section>
+        <section id="nosotros">
+            <div class="nosotros-container">
+              <h2 id="nosotros-title"></h2>
+              <p id="nosotros-content"></p>
+              
+              <!-- Carousel de imágenes -->
+              <div id="carousel" class="carousel">
+                <div class="carousel-images">
+                  <!-- Las imágenes se agregarán dinámicamente -->
+                </div>
+                <button class="carousel-control prev">❮</button>
+                <button class="carousel-control next">❯</button>
+              </div>
+          
+              <!-- Iframe para la ubicación -->
+              <div class="iframe-container">
+                <iframe id="location-iframe" frameborder="0" allowfullscreen></iframe>
+              </div>
+          
+              <!-- Información adicional -->
+              <div class="additional-info">
+                <p id="years-in-business"></p>
+                <p id="core-values"></p>
+                <p id="mission"></p>
+              </div>
+            </div>
+          </section>
+          
     </main>
     <script type="module" src="app.js"></script>
 </body>

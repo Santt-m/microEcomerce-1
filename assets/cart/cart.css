@@ -36,6 +36,7 @@
 .cart-header {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -115,6 +116,12 @@
     display: flex;
     gap: 5px;
 }
+
+#cart-item .icon{
+    width: 20px;
+    height: 20px;
+}
+
 
 .quantity-controls button {
     background-color: #007bff;

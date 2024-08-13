@@ -5,7 +5,7 @@
       "name": "Coca Cola",
       "description": "Refresco de cola.",
       "price": 1500,
-      "image": "../db/bebidasData/1/img0.jpg",
+      "image": "../db/bebidasData/1/img0.webp",
       "promo": true,
       "alcoholic": false
     },
@@ -15,7 +15,7 @@
       "name": "Pepsi",
       "description": "Refresco de cola.",
       "price": 1400,
-      "image": "../db/bebidasData/2/img0.jpg",
+      "image": "../db/bebidasData/2/img0.webp",
       "promo": false,
       "alcoholic": false
     },
@@ -25,7 +25,7 @@
       "name": "Corona",
       "description": "Cerveza rubia mexicana.",
       "price": 3000,
-      "image": "../db/bebidasData/3/img0.jpg",
+      "image": "../db/bebidasData/3/img0.webp",
       "promo": true,
       "alcoholic": true
     },
@@ -35,7 +35,7 @@
       "name": "Heineken",
       "description": "Cerveza rubia holandesa.",
       "price": 3500,
-      "image": "../db/bebidasData/4/img0.jpg",
+      "image": "../db/bebidasData/4/img0.webp",
       "promo": false,
       "alcoholic": true
     },
@@ -45,7 +45,7 @@
       "name": "Jugo de Naranja",
       "description": "Jugo natural de naranja.",
       "price": 2000,
-      "image": "../db/bebidasData/5/img0.jpg",
+      "image": "../db/bebidasData/5/img0.webp",
       "promo": true,
       "alcoholic": false
     }

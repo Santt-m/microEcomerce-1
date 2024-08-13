@@ -1,7 +1,14 @@
+import { addToCart, lessToCart } from '../../cart/cart.js';
+
 // Cargar los datos de productos desde el archivo JSON
 fetch('../db/productData.json')
     .then(response => response.json())
     .then(data => {
+        // Asignar IDs únicos con prefijo 'prod-' a cada producto
+        data.forEach(producto => {
+            producto.id = `prod-${producto.id}`;
+        });
+
         const productos = data;
         const promosContainer = document.getElementById('promos-container');
 
@@ -21,7 +28,7 @@ function mostrarPromos(productos, container) {
     });
 }
 
-// Función para crear un elemento de producto con imagen de fondo
+// Función para crear un elemento de producto con imagen de fondo y botones
 function crearProductoItem(producto) {
     const li = document.createElement('li');
     li.style.backgroundImage = `url(${producto.image})`;
@@ -33,17 +40,20 @@ function crearProductoItem(producto) {
     productInfo.className = 'product-info';
     productInfo.innerHTML = `
         <h3>${producto.name}</h3>
-        <p>${producto.description}</p>
         <span>$${producto.price}</span>
+        <div class="quantity-controls" style="display: none;">
+            <button class="less-to-cart" data-id="${producto.id}">-</button>
+            <button class="add-to-cart" data-product='${JSON.stringify(producto)}'>+</button>
+        </div>
     `;
 
     // Agregar eventos de mouseover y mouseout
     productInfo.addEventListener('mouseover', () => {
-        productInfo.querySelector('p').style.display = 'flex';
+        productInfo.querySelector('div').style.display = 'flex';
     });
 
     productInfo.addEventListener('mouseout', () => {
-        productInfo.querySelector('p').style.display = 'none';
+        productInfo.querySelector('div').style.display = 'none';
     });
 
     li.appendChild(productInfo);
@@ -69,3 +79,14 @@ function autoScrollPromos() {
     // Configura el intervalo para el auto-scroll
     setInterval(autoScroll, intervalTime);
 }
+
+// Delegación de eventos para los botones "+" y "-"
+document.getElementById('promos-container').addEventListener('click', function(event) {
+    const productId = event.target.getAttribute('data-id');
+    if (event.target.classList.contains('add-to-cart')) {
+        const product = JSON.parse(event.target.getAttribute('data-product'));
+        addToCart(product);
+    } else if (event.target.classList.contains('less-to-cart')) {
+        lessToCart(productId);
+    }
+});
