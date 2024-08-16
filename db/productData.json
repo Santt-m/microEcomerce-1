@@ -1,119 +1,200 @@
 [
   {
     "id": 1,
+    "type": "food",
     "tag": ["Brochetas"],
     "name": "Brochetas",
     "description": "Brochetas frescas con rúcula, queso y tomate cherry, sazonadas con orégano. Perfectas para un bocado saludable.",
     "price": 2000,
     "image": "../db/productsData/1/img0.jpg",
-    "promo": true
+    "promo": true,
+    "alcoholic": false
   },
   {
     "id": 2,
+    "type": "food",
     "tag": ["Pastas"],
     "name": "Ñoquis de espinaca",
     "description": "Ñoquis caseros hechos con espinaca fresca. Un plato lleno de sabor y nutrientes.",
     "price": 3000,
     "image": "../db/productsData/2/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 3,
+    "type": "food",
     "tag": ["Pastas"],
     "name": "Ñoquis de remolacha",
     "description": "Ñoquis de remolacha, suaves y coloridos, con un toque dulce y terroso. ¡Ideal para algo diferente!",
     "price": 3000,
     "image": "../db/productsData/3/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 4,
+    "type": "food",
     "tag": ["Tartas"],
     "name": "Tarta de verdura",
     "description": "Tarta de verdura con masa casera, queso gratinado y una mezcla de acelga, cebolla y pimientos.",
     "price": 7000,
     "image": "../db/productsData/4/img0.jpg",
-    "promo": true
+    "promo": true,
+    "alcoholic": false
   },
   {
     "id": 5,
+    "type": "food",
     "tag": [],
     "name": "Aros de cebolla",
     "description": "Crocantes aros de cebolla, fritos a la perfección. Un snack irresistible.",
     "price": 3000,
     "image": "../db/productsData/5/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 6,
+    "type": "food",
     "tag": ["Entradas"],
     "name": "Papas fritas",
     "description": "Papas fritas doradas y crujientes. El acompañamiento perfecto para cualquier comida.",
     "price": 3000,
     "image": "../db/productsData/6/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 7,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Tarta Frutal individual",
     "description": "Tarta frutal individual con una base crujiente y un relleno cremoso, decorada con frutas frescas.",
     "price": 4700,
     "image": "../db/productsData/7/img0.jpg",
-    "promo": true
+    "promo": true,
+    "alcoholic": false
   },
   {
     "id": 8,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Tarta Frutal Grande",
     "description": "Tarta frutal grande, ideal para compartir, con frutas frescas y una base crujiente.",
     "price": 9000,
     "image": "../db/productsData/8/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 9,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Tarta Frutal Mediana",
     "description": "Tarta frutal mediana, equilibrada en tamaño y sabor, con una mezcla de frutas frescas.",
     "price": 7000,
     "image": "../db/productsData/9/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 10,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
     "description": "Pasta Frola grande con dulce de membrillo y una masa suave. Un clásico irresistible.",
     "price": 8000,
     "image": "../db/productsData/10/img0.jpg",
-    "promo": true
+    "promo": true,
+    "alcoholic": false
   },
   {
     "id": 11,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Pasta Frola chica",
     "description": "Pasta Frola chica con dulce de membrillo, perfecta para un postre individual.",
     "price": 4500,
     "image": "../db/productsData/11/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 12,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
     "description": "Pasta Frola grande con masa casera y relleno de dulce de membrillo. Ideal para compartir.",
     "price": 8000,
     "image": "../db/productsData/12/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
   },
   {
     "id": 13,
+    "type": "food",
     "tag": ["Postres"],
     "name": "Tarta de ricota chica",
     "description": "Tarta de ricota chica, suave y cremosa, con un toque de limón. Perfecta para un bocado dulce.",
     "price": 3500,
     "image": "../db/productsData/13/img0.jpg",
-    "promo": false
+    "promo": false,
+    "alcoholic": false
+  },
+  {
+    "id": 14,
+    "type": "drink",
+    "tag": ["Refrescos"],
+    "name": "Coca Cola",
+    "description": "Refresco de cola.",
+    "price": 1500,
+    "image": "../db/bebidasData/1/img0.webp",
+    "promo": true,
+    "alcoholic": false
+  },
+  {
+    "id": 15,
+    "type": "drink",
+    "tag": ["Refrescos"],
+    "name": "Pepsi",
+    "description": "Refresco de cola.",
+    "price": 1400,
+    "image": "../db/bebidasData/2/img0.webp",
+    "promo": false,
+    "alcoholic": false
+  },
+  {
+    "id": 16,
+    "type": "drink",
+    "tag": ["Cerveza"],
+    "name": "Corona",
+    "description": "Cerveza rubia mexicana.",
+    "price": 3000,
+    "image": "../db/bebidasData/3/img0.webp",
+    "promo": true,
+    "alcoholic": true
+  },
+  {
+    "id": 17,
+    "type": "drink",
+    "tag": ["Cerveza"],
+    "name": "Heineken",
+    "description": "Cerveza rubia holandesa.",
+    "price": 3500,
+    "image": "../db/bebidasData/4/img0.webp",
+    "promo": false,
+    "alcoholic": true
+  },
+  {
+    "id": 18,
+    "type": "drink",
+    "tag": ["Jugos"],
+    "name": "Jugo de Naranja",
+    "description": "Jugo natural de naranja.",
+    "price": 2000,
+    "image": "../db/bebidasData/5/img0.webp",
+    "promo": true,
+    "alcoholic": false
   }
 ]

@@ -5,7 +5,6 @@ import '../index/promos/promos.js'
 import '../index/products/products.js'
 
 
-import '../index/bebidas/bebidas.js'
 
 
 import '../index/nosotros/nosotros.js'
