@@ -2,12 +2,32 @@
   "nombreEmpresa": "Nombre de la Empresa",
   "descripcion": "Descripción de la empresa.",
   "direccion": "Dirección de la empresa",
-  "urlGoogleMaps": "https://www.google.com/maps/place/Direccion+de+la+empresa",
-  "urlInstagram": "https://www.instagram.com/nombre_de_la_empresa/",
-  "urlFacebook": "https://www.facebook.com/nombre_de_la_empresa/",
-  "urlTwitter": "https://twitter.com/nombre_de_la_empresa",
   "telefono": "123-456-7890",
   "whatsapp": "1234567890",
+  "logo": "./assets/images/logo.jpeg",
+  "imagenFondo": "./assets/images/img0.webp",
+  "redesSociales": [
+    {
+      "name": "Google Maps",
+      "url": "https://www.google.com/maps/place/Direccion+de+la+empresa"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/nombre_de_la_empresa/"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/nombre_de_la_empresa/"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/nombre_de_la_empresa"
+    },
+    {
+      "name": "WhatsApp",
+      "url": "https://wa.me/1234567890"
+    }
+  ],
   "horarios": [
     {
       "dia": "Lunes",

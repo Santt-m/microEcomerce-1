@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log("Datos de productos cargados:", data);
-            renderSections(data);
             renderPromos(data);
+            renderSections(data);
         })
         .catch(error => {
             console.error("Error al cargar los productos: ", error);

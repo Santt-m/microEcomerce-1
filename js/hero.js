@@ -2,6 +2,7 @@ export function createHeroSection(data) {
     // Crear la sección hero y sus elementos internos
     const heroSection = document.createElement("section");
     heroSection.id = "hero";
+    heroSection.style.backgroundImage = `url(${data.imagenFondo})`;
 
     heroSection.innerHTML = `
         <div class="hero-desc">
@@ -9,17 +10,23 @@ export function createHeroSection(data) {
             <p>${data.descripcion}</p>
             <div class="hero-cont">
                 <div class="hero-cont-img">
-                    <img src="./assets/index/hero/logo.jpeg" alt="Logo local">
+                    <img src="${data.logo}" alt="Logo local">
                 </div>
                 <div class="hero-cont-info">
                     <p id="direccion">Dirección: ${data.direccion}</p>
                     <p id="telefono">Teléfono: ${data.telefono}</p>
                 </div>
                 <div id="horarios-container">
-                    <select id="horarios-local"></select>
-                    <p id="estado-local"></p>
-                    <select id="horarios-envio"></select>
-                    <p id="estado-envio"></p>
+                    <div class="horario-block">
+                        <label for="horarios-local">Horario del Local:</label>
+                        <select id="horarios-local"></select>
+                        <p id="estado-local" class="estado"></p>
+                    </div>
+                    <div class="horario-block">
+                        <label for="horarios-envio">Horario de Envíos:</label>
+                        <select id="horarios-envio"></select>
+                        <p id="estado-envio" class="estado"></p>
+                    </div>
                     <div class="btn-container"></div>
                 </div>
             </div>
@@ -36,12 +43,16 @@ export function createHeroSection(data) {
 function populateHeroSection(data) {
     const btnContainer = document.querySelector(".btn-container");
 
-    // Crear botones de redes sociales si existen en los datos
-    crearBotonRedes(btnContainer, "whatsapp", data.whatsapp, `https://wa.me/${data.whatsapp}`, "WhatsApp", "btn-whatsapp");
-    crearBotonRedes(btnContainer, "google-maps", data.urlGoogleMaps, data.urlGoogleMaps, "Google Maps", "btn-google-maps");
-    crearBotonRedes(btnContainer, "instagram", data.urlInstagram, data.urlInstagram, "Instagram", "btn-instagram");
-    crearBotonRedes(btnContainer, "facebook", data.urlFacebook, data.urlFacebook, "Facebook", "btn-facebook");
-    crearBotonRedes(btnContainer, "twitter", data.urlTwitter, data.urlTwitter, "Twitter", "btn-twitter");
+    // Crear botones dinámicamente para cada red social
+    data.redesSociales.forEach(redSocial => {
+        if (redSocial.url) {
+            const button = document.createElement("button");
+            button.className = `btn-contact btn-${redSocial.name.toLowerCase()}`;
+            button.textContent = redSocial.name;
+            button.onclick = () => window.open(redSocial.url, "_blank");
+            btnContainer.appendChild(button);
+        }
+    });
 
     const horariosLocalSelect = document.getElementById("horarios-local");
     const horariosEnvioSelect = document.getElementById("horarios-envio");
@@ -52,8 +63,8 @@ function populateHeroSection(data) {
     const hoy = new Date().getDay();
     const diaActual = diasSemana[hoy];
 
-    // Rellenar los horarios en los selects
-    data.horarios.forEach((horario) => {
+    // Rellenar horarios en los selects y establecer el día actual
+    data.horarios.forEach(horario => {
         const optionLocal = document.createElement("option");
         optionLocal.value = horario.dia;
         optionLocal.textContent = `${horario.dia}: ${formatearHorario(horario.horarioLocal)}`;
@@ -84,19 +95,7 @@ function populateHeroSection(data) {
     });
 }
 
-// Crear botones de redes sociales
-function crearBotonRedes(container, id, url, link, texto, clase) {
-    if (url) {
-        const button = document.createElement("button");
-        button.id = id;
-        button.className = `btn-contact ${clase}`;
-        button.textContent = texto;
-        button.onclick = () => window.open(link, "_blank");
-        container.appendChild(button);
-    }
-}
-
-// Formatear horario
+// Formatear horario (convertir apertura/cierre en un string legible)
 function formatearHorario(horario) {
     return `${horario.apertura} - ${horario.cierre}`;
 }
@@ -113,9 +112,9 @@ function verificarEstado(dia, horarios, tipo, estadoElement) {
         return;
     }
 
+    const ahora = new Date();
     const apertura = new Date();
     const cierre = new Date();
-    const ahora = new Date();
 
     const [aperturaHora, aperturaMin] = horario.apertura.split(":").map(Number);
     const [cierreHora, cierreMin] = horario.cierre.split(":").map(Number);
@@ -129,14 +128,14 @@ function verificarEstado(dia, horarios, tipo, estadoElement) {
         const minutosRestantes = (cierre - ahora) / (1000 * 60);
 
         if (minutosRestantes <= 30) {
-            estadoElement.textContent = `Abierto, cerrará pronto (${Math.ceil(minutosRestantes)} minutos restantes)`;
+            estadoElement.textContent = tipo === "local" ? `Abierto, cerrará pronto (${Math.ceil(minutosRestantes)} minutos restantes)` : `Envíos disponibles, finalizarán pronto (${Math.ceil(minutosRestantes)} minutos restantes)`;
             estadoElement.classList.add("estado-pronto-cerrar");
         } else {
-            estadoElement.textContent = "Abierto";
+            estadoElement.textContent = tipo === "local" ? "Abierto" : "Envíos disponibles";
             estadoElement.classList.add("estado-abierto");
         }
     } else {
-        estadoElement.textContent = "Cerrado";
+        estadoElement.textContent = tipo === "local" ? "Local cerrado" : "No se realizan envíos";
         estadoElement.classList.add("estado-cerrado");
     }
 }

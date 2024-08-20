@@ -54,3 +54,29 @@
   --quantity-button-radius: 50%;
   --quantity-button-font-size: 16px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+a {
+  text-decoration: none;  
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
