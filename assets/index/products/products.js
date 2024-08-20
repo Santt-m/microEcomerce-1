@@ -1,173 +1,171 @@
-import { addToCart, lessToCart } from '../../cart/cart.js';
+export function renderSections(container, products) {
+  // Obtenemos los tipos únicos de productos
+  const uniqueTypes = [...new Set(products.map(product => product.type))];
 
-const PRODUCTS_PER_PAGE = 6; 
-let currentProductPage = 1;
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("../db/productData.json")
-    .then(response => response.json())
-    .then(data => {
-      const secciones = document.querySelectorAll("section");
+  uniqueTypes.forEach(type => {
+      // Filtrar productos por tipo
+      const productsOfType = products.filter(product => product.type === type);
       
-      secciones.forEach(seccion => {
-        const sectionType = seccion.id;
-        const productos = data.filter(product => product.type === sectionType);
-        
-        if (productos.length > 0) {
-          renderSection(seccion, productos, sectionType);
-        }
+      // Crear la sección para cada tipo
+      const section = document.createElement("section");
+      section.id = type;
+      
+      // Crear el título de la sección
+      const title = document.createElement("h2");
+      title.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+      section.appendChild(title);
+
+      // Crear el contenedor de filtros
+      const filterContainer = document.createElement("div");
+      filterContainer.classList.add("filters");
+      
+      const showAllButton = document.createElement("button");
+      showAllButton.textContent = "Ver Todos";
+      filterContainer.appendChild(showAllButton);
+
+      const searchInput = document.createElement("input");
+      searchInput.type = "text";
+      searchInput.placeholder = "Buscar productos...";
+      filterContainer.appendChild(searchInput);
+
+      const priceFilterButton = document.createElement("button");
+      priceFilterButton.textContent = "Filtros de Precio";
+      priceFilterButton.classList.add("show-price-filters");
+      filterContainer.appendChild(priceFilterButton);
+
+      const priceFilters = document.createElement("div");
+      priceFilters.classList.add("price-filters");
+
+      const minPriceLabel = document.createElement("label");
+      minPriceLabel.textContent = "Precio Mínimo: ";
+      priceFilters.appendChild(minPriceLabel);
+
+      const minPriceInput = document.createElement("input");
+      minPriceInput.type = "number";
+      minPriceInput.placeholder = "0";
+      priceFilters.appendChild(minPriceInput);
+
+      const maxPriceLabel = document.createElement("label");
+      maxPriceLabel.textContent = "Precio Máximo: ";
+      priceFilters.appendChild(maxPriceLabel);
+
+      const maxPriceInput = document.createElement("input");
+      maxPriceInput.type = "number";
+      maxPriceInput.placeholder = "10000";
+      priceFilters.appendChild(maxPriceInput);
+
+      const filterByPriceButton = document.createElement("button");
+      filterByPriceButton.textContent = "Filtrar por precio";
+      priceFilters.appendChild(filterByPriceButton);
+
+      filterContainer.appendChild(priceFilters);
+      section.appendChild(filterContainer);
+
+      // Crear el contenedor de productos
+      const productsContainer = document.createElement("ol");
+      productsContainer.classList.add("products-container");
+      section.appendChild(productsContainer);
+
+      const loadMoreButton = document.createElement("button");
+      loadMoreButton.textContent = "Ver Más";
+      loadMoreButton.classList.add("load-more-products");
+      loadMoreButton.style.display = "none";
+      section.appendChild(loadMoreButton);
+
+      let currentProductPage = 1;  // Variable local para la página actual de productos
+      displayAllProducts(productsOfType, productsContainer, loadMoreButton, currentProductPage);
+
+      // Agregar la sección al contenedor principal
+      container.appendChild(section);
+
+      // Eventos para el filtro
+      showAllButton.addEventListener("click", () => {
+          currentProductPage = 1;
+          displayAllProducts(productsOfType, productsContainer, loadMoreButton, currentProductPage);
       });
 
-      setUpPriceFilterToggles(); // Activar funcionalidad de mostrar/ocultar filtros de precio
-    })
-    .catch(error => {
-      console.error("Error al cargar los productos:", error);
-    });
-});
+      searchInput.addEventListener("input", () => {
+          const searchTerm = sanitizeInput(searchInput.value);
+          const filteredProducts = productsOfType.filter(product => 
+              product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          currentProductPage = 1;
+          displayAllProducts(filteredProducts, productsContainer, loadMoreButton, currentProductPage);
+      });
 
-// Función para renderizar las secciones
-function renderSection(seccion, productos, sectionType) {
-  const filtrosContainer = document.createElement("div");
-  filtrosContainer.classList.add("filtros");
-  
-  const verTodosButton = document.createElement("button");
-  verTodosButton.textContent = "Ver Todos";
-  filtrosContainer.appendChild(verTodosButton);
+      filterByPriceButton.addEventListener("click", () => {
+          const minPrice = parseFloat(minPriceInput.value) || 0;
+          const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+          const filteredProducts = productsOfType.filter(product =>
+              product.price >= minPrice && product.price <= maxPrice
+          );
+          currentProductPage = 1;
+          displayAllProducts(filteredProducts, productsContainer, loadMoreButton, currentProductPage);
+      });
 
-  const searchInput = document.createElement("input");
-  searchInput.type = "text";
-  searchInput.placeholder = "Buscar productos...";
-  filtrosContainer.appendChild(searchInput);
-
-  const btnfilterprice = document.createElement("button");
-  btnfilterprice.textContent = "Filtros de Precio";
-  btnfilterprice.classList.add("ver-price-filters");
-  filtrosContainer.appendChild(btnfilterprice);
-
-  const priceFilters = document.createElement("div");
-  priceFilters.classList.add("price-filters");
-
-  const minPriceLabel = document.createElement("label");
-  minPriceLabel.textContent = "Precio Mínimo: ";
-  priceFilters.appendChild(minPriceLabel);
-
-  const minPriceInput = document.createElement("input");
-  minPriceInput.type = "number";
-  minPriceInput.placeholder = "0";
-  priceFilters.appendChild(minPriceInput);
-
-  const maxPriceLabel = document.createElement("label");
-  maxPriceLabel.textContent = "Precio Máximo: ";
-  priceFilters.appendChild(maxPriceLabel);
-
-  const maxPriceInput = document.createElement("input");
-  maxPriceInput.type = "number";
-  maxPriceInput.placeholder = "10000";
-  priceFilters.appendChild(maxPriceInput);
-
-  const filterPriceButton = document.createElement("button");
-  filterPriceButton.textContent = "Filtrar por precio";
-  priceFilters.appendChild(filterPriceButton);
-
-  filtrosContainer.appendChild(priceFilters);
-  seccion.appendChild(filtrosContainer);
-
-  const productosContainer = document.createElement("ol");
-  productosContainer.classList.add("productos-container");
-  seccion.appendChild(productosContainer);
-
-  const verMasButton = document.createElement("button");
-  verMasButton.textContent = "Ver Más";
-  verMasButton.classList.add("ver-mas-productos");
-  verMasButton.style.display = "none";
-  seccion.appendChild(verMasButton);
-
-  let currentPage = 1;
-  mostrarTodos(productos, productosContainer, verMasButton);
-
-  verTodosButton.addEventListener("click", () => {
-    currentPage = 1;
-    mostrarTodos(productos, productosContainer, verMasButton);
+      loadMoreButton.addEventListener("click", () => {
+          currentProductPage++;
+          displayMoreProducts(productsOfType, productsContainer, loadMoreButton, currentProductPage);
+      });
   });
 
-  searchInput.addEventListener("input", () => {
-    const searchTerm = sanitizeInput(searchInput.value);
-    const productosFiltrados = productos.filter(product => 
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    mostrarTodos(productosFiltrados, productosContainer, verMasButton);
-  });
-
-  filterPriceButton.addEventListener("click", () => {
-    const minPrice = parseFloat(minPriceInput.value) || 0;
-    const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
-    const productosFiltrados = productos.filter(product =>
-      product.price >= minPrice && product.price <= maxPrice
-    );
-    mostrarTodos(productosFiltrados, productosContainer, verMasButton);
-  });
-
-  verMasButton.addEventListener("click", () => {
-    currentPage++;
-    mostrarMasProductos(productos, productosContainer, verMasButton, currentPage);
-  });
+  setUpPriceFilterToggles(); // Activar funcionalidad de mostrar/ocultar filtros de precio
 }
 
 // Función para mostrar todos los productos
-function mostrarTodos(productos, container, verMasButton) {
+function displayAllProducts(products, container, loadMoreButton, currentProductPage) {
   container.innerHTML = "";
-  currentProductPage = 1;
-  mostrarMasProductos(productos, container, verMasButton, currentProductPage);
+  displayMoreProducts(products, container, loadMoreButton, currentProductPage);
 }
 
 // Función para mostrar más productos
-function mostrarMasProductos(productos, container, verMasButton, page) {
+function displayMoreProducts(products, container, loadMoreButton, page) {
   const start = (page - 1) * PRODUCTS_PER_PAGE;
   const end = page * PRODUCTS_PER_PAGE;
-  const productosFiltrados = productos.slice(start, end);
+  const filteredProducts = products.slice(start, end);
 
-  productosFiltrados.forEach(producto => {
-    container.appendChild(crearProductoItem(producto));
+  filteredProducts.forEach(product => {
+      container.appendChild(createProductItem(product));
   });
 
-  if (end >= productos.length) {
-    verMasButton.style.display = "none";
+  if (end >= products.length) {
+      loadMoreButton.style.display = "none";
   } else {
-    verMasButton.style.display = "block";
+      loadMoreButton.style.display = "block";
   }
 }
 
 // Función para crear un producto
-function crearProductoItem(producto) {
+function createProductItem(product) {
   const li = document.createElement("li");
   li.innerHTML = `
-    <h3>${producto.name}</h3>
-    <img src="${producto.image}" alt="${producto.name}">
-    <p>${producto.description}</p>
-    <span>$${producto.price}</span>
-    <div class="quantity-controls">
-      <button class="less-to-cart" data-id="${producto.id}">-</button>
-      <span class="product-quantity" data-id="${producto.id}">0</span>
-      <button class="add-to-cart" data-product='${JSON.stringify(producto)}'>+</button>
-    </div>
+      <h3>${product.name}</h3>
+      <img src="${product.image}" alt="${product.name}">
+      <p>${product.description}</p>
+      <span>$${product.price}</span>
+      <div class="quantity-controls">
+          <button class="less-to-cart" data-id="${product.id}">-</button>
+          <span class="product-quantity" data-id="${product.id}">0</span>
+          <button class="add-to-cart" data-product='${JSON.stringify(product)}'>+</button>
+      </div>
   `;
   return li;
 }
 
 // Función para configurar los toggles de los filtros de precio
 function setUpPriceFilterToggles() {
-  const priceFilterButtons = document.querySelectorAll('.ver-price-filters');
+  const priceFilterButtons = document.querySelectorAll('.show-price-filters');
 
   priceFilterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const priceFilters = button.nextElementSibling;
-      
-      if (priceFilters.classList.contains('show')) {
-        priceFilters.classList.remove('show');
-      } else {
-        priceFilters.classList.add('show');
-      }
-    });
+      button.addEventListener('click', () => {
+          const priceFilters = button.nextElementSibling;
+          
+          if (priceFilters.classList.contains('show')) {
+              priceFilters.classList.remove('show');
+          } else {
+              priceFilters.classList.add('show');
+          }
+      });
   });
 }
 
@@ -180,10 +178,10 @@ function sanitizeInput(input) {
 // Eventos de agregar y quitar productos del carrito
 document.addEventListener('click', function(event) {
   if (event.target.classList.contains('add-to-cart')) {
-    const product = JSON.parse(event.target.getAttribute('data-product'));
-    addToCart(product);
+      const product = JSON.parse(event.target.getAttribute('data-product'));
+      addToCart(product);
   } else if (event.target.classList.contains('less-to-cart')) {
-    const productId = event.target.getAttribute('data-id');
-    lessToCart(productId);
+      const productId = event.target.getAttribute('data-id');
+      lessToCart(productId);
   }
 });

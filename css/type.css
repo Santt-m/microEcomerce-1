@@ -1,0 +1,190 @@
+/* Sección y contenedor de filtros */
+section {
+  width: 100%;
+  padding: var(--spacing-large);
+  background-color: var(--background-color);
+  margin-bottom: var(--spacing-large);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-medium);
+  background-color: var(--white-color);
+  border-radius: var(--std-borderRadius);
+  box-shadow: var(--std-box-shadow);
+}
+
+/* Botones y entradas dentro del contenedor de filtros */
+.filtros button,
+.filtros input {
+  margin: var(--spacing-small);
+  padding: var(--btn-padding);
+  border: none;
+  border-radius: var(--btn-borderRadius);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtros button:hover,
+.filtros input:hover {
+  background-color: var(--primary-color-hover);
+  transform: scale(1.05);
+}
+
+.filtros input {
+  width: 150px;
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+}
+
+/* Contenedor de filtros de precio */
+.price-filters {
+  display: none;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-filters.show {
+  display: flex;
+}
+
+.price-filters input {
+  width: 100px;
+  padding: var(--input-padding);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+}
+
+.price-filters button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-radius: var(--input-border-radius);
+  cursor: pointer;
+}
+
+.price-filters button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+/* Contenedor de productos */
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--products-grid-gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Cada producto */
+.productos-container li {
+  padding: var(--spacing-medium);
+  background-color: var(--white-color);
+  border-radius: var(--std-borderRadius);
+  box-shadow: var(--std-box-shadow);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.productos-container li:hover {
+  transform: translateY(-10px);
+}
+
+.productos-container img {
+  max-width: 100%;
+  max-height: var(--products-image-height);
+  margin-bottom: var(--spacing-small);
+  border-radius: var(--std-borderRadius);
+}
+
+.productos-container h3 {
+  font-size: var(--font-size-medium);
+  margin-bottom: var(--spacing-small);
+  color: var(--primary-color);
+}
+
+.productos-container p {
+  font-size: var(--font-size-small);
+  color: var(--font-color-light);
+  margin-bottom: var(--spacing-small);
+}
+
+.productos-container span {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-bold);
+  color: var(--font-color);
+  margin-bottom: var(--spacing-medium);
+  display: block;
+}
+
+/* Controles de cantidad */
+.quantity-controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: var(--spacing-small);
+}
+
+.quantity-controls button {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white-color);
+  padding: var(--quantity-button-padding);
+  border-radius: var(--quantity-button-radius);
+  font-size: var(--quantity-button-font-size);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-controls button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.quantity-controls .product-quantity {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-bold);
+  color: var(--font-color);
+}
+
+/* Botón "Ver Más" */
+.ver-mas-productos {
+  display: block;
+  margin: var(--spacing-large) auto;
+  padding: var(--btn-padding);
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--white-color);
+  border-radius: var(--btn-borderRadius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ver-mas-productos:hover {
+  background-color: var(--primary-color-hover);
+}
+
+/* Responsividad */
+@media screen and (max-width: 768px) {
+  .productos-container {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros {
+    flex-direction: column;
+  }
+
+  .filtros button,
+  .filtros input {
+    width: 100%;
+    margin-bottom: var(--spacing-small);
+  }
+}

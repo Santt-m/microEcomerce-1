@@ -8,34 +8,74 @@
   "urlTwitter": "https://twitter.com/nombre_de_la_empresa",
   "telefono": "123-456-7890",
   "whatsapp": "1234567890",
-  "horariosLocal": [
-    { "dia": "Lunes", "horario": "10:00 - 23:00" },
-    { "dia": "Martes", "horario": "10:00 - 22:00" },
-    { "dia": "Miércoles", "horario": "10:00 - 22:00" },
-    { "dia": "Jueves", "horario": "10:00 - 22:00" },
-    { "dia": "Viernes", "horario": "10:00 - 22:00" },
-    { "dia": "Sábado", "horario": "10:00 - 22:00" },
-    { "dia": "Domingo", "horario": "10:00 - 22:00" }
-  ],
-  "horariosEnvio": [
-    { "dia": "Lunes", "horario": "10:00 - 23:00" },
-    { "dia": "Martes", "horario": "13:00 - 15:00" },
-    { "dia": "Miércoles", "horario": "16:00 - 18:00" },
-    { "dia": "Jueves", "horario": "19:00 - 21:00" }
-  ],
-  "aboutUs": {
-    "title": "Sobre Nosotros",
-    "content": "Somos una empresa dedicada a ofrecer productos de alta calidad. Nuestra misión es brindar a nuestros clientes la mejor experiencia de compra, con un enfoque en la calidad, el servicio al cliente y la innovación.",
-    "carouselImages": [
-      "../db/clientData/carouselImages/1.jpg",
-      "../db/clientData/carouselImages/2.jpg",
-      "../db/clientData/carouselImages/3.jpg"
-    ],
-    "locationIframe": "https://www.google.com/maps/embed?...",
-    "additionalInfo": {
-      "yearsInBusiness": "Más de 20 años en el mercado",
-      "coreValues": "Calidad, Compromiso y Servicio",
-      "mission": "Nuestra misión es proporcionar productos excepcionales."
+  "horarios": [
+    {
+      "dia": "Lunes",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "23:00"
+      },
+      "horarioEnvio": {
+        "apertura": "10:00",
+        "cierre": "23:00"
+      }
+    },
+    {
+      "dia": "Martes",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": {
+        "apertura": "13:00",
+        "cierre": "15:00"
+      }
+    },
+    {
+      "dia": "Miércoles",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": {
+        "apertura": "16:00",
+        "cierre": "18:00"
+      }
+    },
+    {
+      "dia": "Jueves",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": {
+        "apertura": "19:00",
+        "cierre": "21:00"
+      }
+    },
+    {
+      "dia": "Viernes",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": null
+    },
+    {
+      "dia": "Sábado",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": null
+    },
+    {
+      "dia": "Domingo",
+      "horarioLocal": {
+        "apertura": "10:00",
+        "cierre": "22:00"
+      },
+      "horarioEnvio": null
     }
-  }
+  ]
 }
