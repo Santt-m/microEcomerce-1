@@ -1,58 +1,47 @@
-import { addToCart, lessToCart, removeFromCart, loadCart, localCart } from './cart.js';
+import { addToCart, lessToCart, updateProductQuantityInView, localCart } from './cart.js';
 
-const PRODUCTS_PER_PAGE = 6;
-
+// Secciones de productos por tipo
 export function renderSections(data) {
+    // Obtener los tipos únicos de productos
     const uniqueTypes = [...new Set(data.map(product => product.type))];
 
+    // Crear una sección para cada tipo de producto
     uniqueTypes.forEach(type => {
         const section = createSection(type);
         document.getElementById("app").appendChild(section);
 
+        // Filtrar productos por tipo
         const productsByType = data.filter(product => product.type === type);
-        renderSection(section, productsByType, type);
+        renderSection(section, productsByType, data); // Pasamos los datos completos de los productos
     });
-
-    updateAllProductQuantities();  // Inicializa los spans con las cantidades
 }
 
+// Crear una sección para cada tipo de producto
 function createSection(type) {
     const section = document.createElement("section");
     section.classList.add("type_product");
     section.id = type;
+    section.innerHTML = `<h2>${type}</h2>`;
     return section;
 }
 
-function renderSection(section, products, sectionType) {
-    const filtrosContainer = createFilters(products);
+// Productos y filtros dentro de la sección
+function renderSection(section, products, productsData) {
+    const filtrosContainer = createFiltersContainer(products, section, productsData);
+    section.appendChild(filtrosContainer);
+
     const productsContainer = document.createElement("ol");
     productsContainer.classList.add("productos-container");
-
-    section.appendChild(filtrosContainer);
     section.appendChild(productsContainer);
 
-    const verMasButton = createVerMasButton(productsContainer, products);
-    section.appendChild(verMasButton);
+    displayProducts(products, productsContainer, productsData);
 
-    displayAllProducts(products, productsContainer, verMasButton, 1);
+    // Delegación de eventos para asegurar que solo se manejen clics en los botones adecuados
+    productsContainer.addEventListener('click', (event) => handleProductActions(event, productsData));
 }
 
-function createVerMasButton(productsContainer, products) {
-    const verMasButton = document.createElement("button");
-    verMasButton.textContent = "Ver Más";
-    verMasButton.classList.add("ver-mas-productos");
-
-    let currentPage = 1;
-
-    verMasButton.addEventListener("click", () => {
-        currentPage++;
-        displayMoreProducts(products, productsContainer, verMasButton, currentPage);
-    });
-
-    return verMasButton;
-}
-
-function createFilters(products) {
+// Filtros y buscador
+function createFiltersContainer(products, section, productsData) {
     const filtrosContainer = document.createElement("div");
     filtrosContainer.classList.add("filtros");
 
@@ -60,29 +49,94 @@ function createFilters(products) {
     verTodosButton.textContent = "Ver Todos";
     filtrosContainer.appendChild(verTodosButton);
 
+    const searchInput = document.createElement("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Buscar productos...";
+    filtrosContainer.appendChild(searchInput);
+
+    // Filtros por Tags
+    const tags = new Set();
+    products.forEach(product => product.tag.forEach(tag => tags.add(tag)));
+
+    tags.forEach(tag => {
+        const tagButton = document.createElement("button");
+        tagButton.textContent = tag;
+        filtrosContainer.appendChild(tagButton);
+
+        tagButton.addEventListener("click", () => {
+            const filteredProducts = products.filter(product => product.tag.includes(tag));
+            displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+        });
+    });
+
+    // Filtro de precio
+    const btnfilterprice = document.createElement("button");
+    btnfilterprice.textContent = "Filtros de Precio";
+    filtrosContainer.appendChild(btnfilterprice);
+
+    const priceFilters = createPriceFilters(products, section, productsData);
+    filtrosContainer.appendChild(priceFilters);
+
+    btnfilterprice.addEventListener("click", () => {
+        priceFilters.style.display = priceFilters.style.display === "none" ? "block" : "none";
+    });
+
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+    });
+
+    verTodosButton.addEventListener("click", () => {
+        displayProducts(products, section.querySelector('.productos-container'), productsData);
+    });
+
     return filtrosContainer;
 }
 
-function displayAllProducts(products, container, verMasButton, currentPage) {
-    container.innerHTML = "";
-    displayMoreProducts(products, container, verMasButton, currentPage);
+// Filtro de precio
+function createPriceFilters(products, section, productsData) {
+    const priceFilters = document.createElement("div");
+    priceFilters.classList.add("price-filters");
+    priceFilters.style.display = "none";
+
+    const minPriceInput = document.createElement("input");
+    minPriceInput.type = "number";
+    minPriceInput.placeholder = "Mínimo";
+    priceFilters.appendChild(minPriceInput);
+
+    const maxPriceInput = document.createElement("input");
+    maxPriceInput.type = "number";
+    maxPriceInput.placeholder = "Máximo";
+    priceFilters.appendChild(maxPriceInput);
+
+    const filterPriceButton = document.createElement("button");
+    filterPriceButton.textContent = "Aplicar Filtro";
+    priceFilters.appendChild(filterPriceButton);
+
+    filterPriceButton.addEventListener("click", () => {
+        const minPrice = parseFloat(minPriceInput.value) || 0;
+        const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+        const filteredProducts = products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+        displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+    });
+
+    return priceFilters;
 }
 
-function displayMoreProducts(products, container, verMasButton, currentPage) {
-    const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
-    const end = currentPage * PRODUCTS_PER_PAGE;
-    const filteredProducts = products.slice(start, end);
+// Mostrar productos en la sección
+function displayProducts(products, container, productsData) {
+    container.innerHTML = "";
 
-    filteredProducts.forEach(product => {
+    products.forEach(product => {
         const productItem = createProductItem(product);
         container.appendChild(productItem);
     });
-
-    if (end >= products.length) {
-        verMasButton.style.display = "none";
-    }
 }
 
+// Estructura HTML de cada producto
 function createProductItem(product) {
     const li = document.createElement("li");
     const productInCart = localCart.find(item => item.id === product.id);
@@ -94,48 +148,26 @@ function createProductItem(product) {
         <p>${product.description}</p>
         <span>$${product.price}</span>
         <div class="quantity-controls">
-          <button class="less-to-cart" data-id="${product.id}">-</button>
+          <button class="less-to-cart" data-id="${product.id}" data-action="less">-</button>
           <span class="product-quantity" data-id="${product.id}">${productQuantity}</span>
-          <button class="add-to-cart" data-product='${JSON.stringify(product)}' data-id="${product.id}">+</button>
+          <button class="add-to-cart" data-id="${product.id}" data-action="add">+</button>
         </div>
     `;
     return li;
 }
 
-// Actualización de los spans de los productos
-function updateProductQuantityInView(productId) {
-    const productInCart = localCart.find(item => item.id === productId);
-    const quantitySpan = document.querySelector(`.product-quantity[data-id="${productId}"]`);
-
-    if (quantitySpan) {
-        quantitySpan.textContent = productInCart ? productInCart.quantity : 0;
-    }
-}
-
-function updateAllProductQuantities() {
-    document.querySelectorAll('.product-quantity').forEach(span => {
-        const productId = span.getAttribute('data-id');
-        updateProductQuantityInView(productId);
-    });
-}
-
-// Sincronización periódica con el carrito
-setInterval(() => {
-    loadCart();  
-    updateAllProductQuantities();
-}, 3000);
-
-document.addEventListener('click', function(event) {
+// Acción de agregar y restar productos
+function handleProductActions(event, productsData) {
     const target = event.target;
+    const action = target.getAttribute('data-action');
+    const productId = target.getAttribute('data-id');
 
-    if (target.classList.contains('add-to-cart')) {
-        const productId = target.getAttribute('data-id');
-        const product = JSON.parse(target.getAttribute('data-product'));
-        addToCart(product);
-        updateProductQuantityInView(productId);
-    } else if (target.classList.contains('less-to-cart')) {
-        const productId = target.getAttribute('data-id');
-        lessToCart(productId);
-        updateProductQuantityInView(productId);
+    if (action === 'add') {
+        addToCart(productId, productsData); // Pasamos productsData aquí
+    } else if (action === 'less') {
+        lessToCart(productId, productsData); // Pasamos productsData aquí
     }
-});
+
+    // Actualizar las vistas después de la acción
+    updateProductQuantityInView(productId); 
+}
