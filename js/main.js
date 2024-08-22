@@ -1,16 +1,6 @@
-import { renderSections } from './type.js';
-import { loadCart } from './cart.js';
-import { renderPromos } from './promos.js';
-import { createHeroSection } from './hero.js';
+import { initializeShop } from './shop.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const appElement = document.getElementById("app");
-
-    if (!appElement) {
-        console.error("No se encontró el contenedor 'app' en el DOM.");
-        return;
-    }
-
     try {
         const [productResponse, clientResponse] = await Promise.all([
             fetch("../db/productData.json"),
@@ -20,10 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const products = await productResponse.json();
         const clientData = await clientResponse.json();
 
-        loadCart(products); // Cargar el carrito desde localStorage
-        renderPromos(products);
-        renderSections(products);
-        createHeroSection(clientData);
+        console.log("Productos cargados:", products);
+        console.log("Datos del cliente cargados:", clientData);
+
+        // Inicializar la tienda con los productos cargados
+        initializeShop(products);
 
     } catch (error) {
         console.error("Error al cargar los datos: ", error);

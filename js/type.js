@@ -1,18 +1,16 @@
 import { addToCart, lessToCart, updateProductQuantityInView, localCart } from './cart.js';
 
-// Secciones de productos por tipo
+// Renderizar las secciones de productos por tipo
 export function renderSections(data) {
-    // Obtener los tipos únicos de productos
     const uniqueTypes = [...new Set(data.map(product => product.type))];
+    console.log("Tipos de productos encontrados:", uniqueTypes);
 
-    // Crear una sección para cada tipo de producto
     uniqueTypes.forEach(type => {
         const section = createSection(type);
         document.getElementById("app").appendChild(section);
 
-        // Filtrar productos por tipo
         const productsByType = data.filter(product => product.type === type);
-        renderSection(section, productsByType, data); // Pasamos los datos completos de los productos
+        renderSection(section, productsByType, data);
     });
 }
 
@@ -22,10 +20,11 @@ function createSection(type) {
     section.classList.add("type_product");
     section.id = type;
     section.innerHTML = `<h2>${type}</h2>`;
+    console.log(`Sección creada para tipo: ${type}`);
     return section;
 }
 
-// Productos y filtros dentro de la sección
+// Renderizar la sección de productos
 function renderSection(section, products, productsData) {
     const filtrosContainer = createFiltersContainer(products, section, productsData);
     section.appendChild(filtrosContainer);
@@ -36,11 +35,11 @@ function renderSection(section, products, productsData) {
 
     displayProducts(products, productsContainer, productsData);
 
-    // Delegación de eventos para asegurar que solo se manejen clics en los botones adecuados
+    // Delegación de eventos para manejar los clics en botones de productos
     productsContainer.addEventListener('click', (event) => handleProductActions(event, productsData));
 }
 
-// Filtros y buscador
+// Crear contenedor de filtros y buscadores
 function createFiltersContainer(products, section, productsData) {
     const filtrosContainer = document.createElement("div");
     filtrosContainer.classList.add("filtros");
@@ -66,6 +65,7 @@ function createFiltersContainer(products, section, productsData) {
         tagButton.addEventListener("click", () => {
             const filteredProducts = products.filter(product => product.tag.includes(tag));
             displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+            console.log(`Productos filtrados por tag: ${tag}`, filteredProducts);
         });
     });
 
@@ -87,16 +87,18 @@ function createFiltersContainer(products, section, productsData) {
             product.name.toLowerCase().includes(searchTerm)
         );
         displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+        console.log(`Productos filtrados por búsqueda: ${searchTerm}`, filteredProducts);
     });
 
     verTodosButton.addEventListener("click", () => {
         displayProducts(products, section.querySelector('.productos-container'), productsData);
+        console.log("Todos los productos mostrados.");
     });
 
     return filtrosContainer;
 }
 
-// Filtro de precio
+// Crear filtros de precio
 function createPriceFilters(products, section, productsData) {
     const priceFilters = document.createElement("div");
     priceFilters.classList.add("price-filters");
@@ -121,12 +123,13 @@ function createPriceFilters(products, section, productsData) {
         const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
         const filteredProducts = products.filter(product => product.price >= minPrice && product.price <= maxPrice);
         displayProducts(filteredProducts, section.querySelector('.productos-container'), productsData);
+        console.log(`Productos filtrados por precio: ${minPrice} - ${maxPrice}`, filteredProducts);
     });
 
     return priceFilters;
 }
 
-// Mostrar productos en la sección
+// Mostrar productos en la sección correspondiente
 function displayProducts(products, container, productsData) {
     container.innerHTML = "";
 
@@ -134,9 +137,10 @@ function displayProducts(products, container, productsData) {
         const productItem = createProductItem(product);
         container.appendChild(productItem);
     });
+    console.log("Productos mostrados:", products.map(p => p.name));
 }
 
-// Estructura HTML de cada producto
+// Crear el HTML para cada producto
 function createProductItem(product) {
     const li = document.createElement("li");
     const productInCart = localCart.find(item => item.id === product.id);
@@ -148,26 +152,29 @@ function createProductItem(product) {
         <p>${product.description}</p>
         <span>$${product.price}</span>
         <div class="quantity-controls">
-          <button class="less-to-cart" data-id="${product.id}" data-action="less">-</button>
-          <span class="product-quantity" data-id="${product.id}">${productQuantity}</span>
-          <button class="add-to-cart" data-id="${product.id}" data-action="add">+</button>
+            <button class="less-to-cart" data-id="${product.id}" data-action="less">-</button>
+            <span class="product-quantity" data-id="${product.id}">${productQuantity}</span>
+            <button class="add-to-cart" data-id="${product.id}" data-action="add">+</button>
         </div>
     `;
     return li;
 }
 
-// Acción de agregar y restar productos
+// Manejar las acciones de agregar y quitar productos
 function handleProductActions(event, productsData) {
     const target = event.target;
     const action = target.getAttribute('data-action');
     const productId = target.getAttribute('data-id');
 
     if (action === 'add') {
-        addToCart(productId, productsData); // Pasamos productsData aquí
+        console.log(`Botón + clickeado para producto ID: ${productId}`);
+        addToCart(productId, productsData);
     } else if (action === 'less') {
-        lessToCart(productId, productsData); // Pasamos productsData aquí
+        console.log(`Botón - clickeado para producto ID: ${productId}`);
+        lessToCart(productId, productsData);
     }
 
     // Actualizar las vistas después de la acción
     updateProductQuantityInView(productId); 
+    console.log(`Cantidad actualizada en la vista para producto ID: ${productId}`);
 }

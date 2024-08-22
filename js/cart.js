@@ -1,4 +1,3 @@
-// Array que contiene los productos agregados al carrito
 export let localCart = [];
 
 // Cargar el carrito desde localStorage y actualizar la UI
@@ -6,50 +5,30 @@ export function loadCart(productsArray) {
     const storedCart = localStorage.getItem("localCart");
     if (storedCart) {
         localCart = JSON.parse(storedCart);
+        console.log("Carrito cargado desde localStorage:", localCart);
     }
-    updateCartUI(productsArray); 
-    updateAllProductQuantitiesInView(); // Actualizar las cantidades en las tarjetas de producto
+    updateCartUI(productsArray); // Actualizar la UI del carrito
+    updateAllProductQuantitiesInView(); // Actualizar las cantidades de productos en las tarjetas
 }
 
 // Guardar el carrito en localStorage
 function saveCartToLocalStorage() {
     localStorage.setItem("localCart", JSON.stringify(localCart));
+    console.log("Carrito guardado en localStorage:", localCart);
 }
 
 // Agregar producto al carrito
 export function addToCart(productId, productsData) {
-    if (!productsData || productsData.length === 0) {
-        console.error("Los datos del producto no están disponibles.");
-        return;
-    }
-
+    console.log(`Producto agregado al carrito: ${productId}`);
     const cartItem = localCart.find(item => item.id === productId);
 
     if (cartItem) {
         cartItem.quantity += 1;
+        console.log(`Cantidad incrementada para producto ID: ${productId}`);
     } else {
-        localCart.push({ id: productId, quantity: 1 });
-    }
-
-    saveCartToLocalStorage();
-    updateProductQuantityInView(productId); // Actualizar la cantidad del producto en el catálogo
-    updateCartUI(productsData); // Actualizar la UI del carrito
-}
-
-// Quitar producto del carrito
-export function lessToCart(productId, productsData) {
-    if (!productsData || productsData.length === 0) {
-        console.error("Los datos del producto no están disponibles.");
-        return;
-    }
-
-    const cartItem = localCart.find(item => item.id === productId);
-
-    if (cartItem) {
-        cartItem.quantity -= 1;
-        if (cartItem.quantity <= 0) {
-            localCart = localCart.filter(item => item.id !== productId);
-        }
+        const product = productsData.find(p => p.id === productId);
+        localCart.push({ id: productId, quantity: 1, name: product.name });
+        console.log(`Producto añadido al carrito: ${product.name}`);
     }
 
     saveCartToLocalStorage();
@@ -57,7 +36,37 @@ export function lessToCart(productId, productsData) {
     updateCartUI(productsData);
 }
 
-// Actualizar cantidad en el catálogo y el carrito
+// Quitar producto del carrito
+export function lessToCart(productId, productsData) {
+    console.log(`Botón - clickeado para producto ID: ${productId}`);
+    const cartItem = localCart.find(item => item.id === productId);
+
+    if (cartItem) {
+        cartItem.quantity -= 1;
+        if (cartItem.quantity <= 0) {
+            localCart = localCart.filter(item => item.id !== productId);
+            console.log(`Producto con ID ${productId} eliminado del carrito.`);
+        } else {
+            console.log(`Cantidad reducida para producto ID: ${productId}`);
+        }
+
+        saveCartToLocalStorage();
+        updateProductQuantityInView(productId);
+        updateCartUI(productsData);
+    }
+}
+
+// Eliminar producto completamente del carrito
+export function removeFromCart(productId, productsData) {
+    console.log(`Botón Eliminar clickeado para producto ID: ${productId}`);
+    localCart = localCart.filter(item => item.id !== productId);
+
+    saveCartToLocalStorage();
+    updateProductQuantityInView(productId);
+    updateCartUI(productsData);
+}
+
+// Actualizar cantidad en la vista de productos
 export function updateProductQuantityInView(productId) {
     const cartItem = localCart.find(item => item.id === productId);
     const quantitySpans = document.querySelectorAll(`.product-quantity[data-id="${productId}"]`);
@@ -67,7 +76,7 @@ export function updateProductQuantityInView(productId) {
     });
 }
 
-// Actualizar todas las cantidades en la vista del catálogo
+// Actualizar todas las cantidades en la vista de los productos
 export function updateAllProductQuantitiesInView() {
     localCart.forEach(cartItem => {
         updateProductQuantityInView(cartItem.id);
@@ -76,15 +85,10 @@ export function updateAllProductQuantitiesInView() {
 
 // Actualizar la UI del carrito
 export function updateCartUI(productsData) {
-    if (!productsData || productsData.length === 0) {
-        console.error("Los datos del producto no están disponibles.");
-        return;
-    }
-
     const cartContainer = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
 
-    cartContainer.innerHTML = "";
+    cartContainer.innerHTML = ""; // Limpiar el contenedor del carrito
     if (localCart.length === 0) {
         cartContainer.innerHTML = "<p>El carrito está vacío</p>";
         totalPriceElement.textContent = "$0";
@@ -93,7 +97,7 @@ export function updateCartUI(productsData) {
 
     let totalPrice = 0;
     localCart.forEach(cartItem => {
-        const product = productsData.find(p => p.id === cartItem.id);
+        const product = productsData.find(p => p.id == cartItem.id);
         if (product) {
             const cartItemElement = document.createElement("li");
             cartItemElement.innerHTML = `
@@ -112,42 +116,30 @@ export function updateCartUI(productsData) {
     });
 
     totalPriceElement.textContent = `$${totalPrice}`;
-
-    attachCartEventListeners(productsData);
+    attachCartEventListeners(productsData);  // Delegación de eventos
 }
 
-// Asignar eventos a los botones del carrito
+// Delegación de eventos en el carrito
 function attachCartEventListeners(productsData) {
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.removeEventListener('click', handleAddToCart); // Eliminar evento anterior
-        button.addEventListener('click', handleAddToCart);
+    const cartContainer = document.getElementById("cart-items");
+
+    // Eliminar los eventos anteriores antes de agregar nuevos
+    cartContainer.replaceWith(cartContainer.cloneNode(true));
+    const newCartContainer = document.getElementById("cart-items");
+
+    newCartContainer.addEventListener('click', (event) => {
+        const target = event.target;
+        const productId = target.getAttribute('data-id');
+
+        if (target.classList.contains('add-to-cart')) {
+            console.log(`Botón + clickeado en carrito para producto ID: ${productId}`);
+            addToCart(productId, productsData);
+        } else if (target.classList.contains('less-to-cart')) {
+            console.log(`Botón - clickeado en carrito para producto ID: ${productId}`);
+            lessToCart(productId, productsData);
+        } else if (target.classList.contains('remove-from-cart')) {
+            console.log(`Botón Eliminar clickeado en carrito para producto ID: ${productId}`);
+            removeFromCart(productId, productsData);
+        }
     });
-
-    document.querySelectorAll('.less-to-cart').forEach(button => {
-        button.removeEventListener('click', handleLessToCart); // Eliminar evento anterior
-        button.addEventListener('click', handleLessToCart);
-    });
-
-    document.querySelectorAll('.remove-from-cart').forEach(button => {
-        button.removeEventListener('click', handleRemoveFromCart); // Eliminar evento anterior
-        button.addEventListener('click', handleRemoveFromCart);
-    });
-
-    // Funciones de manejo de eventos para evitar duplicación
-    function handleAddToCart(event) {
-        const productId = event.target.getAttribute('data-id');
-        addToCart(productId, productsData);
-    }
-
-    function handleLessToCart(event) {
-        const productId = event.target.getAttribute('data-id');
-        lessToCart(productId, productsData);
-    }
-
-    function handleRemoveFromCart(event) {
-        const productId = event.target.getAttribute('data-id');
-        localCart = localCart.filter(item => item.id !== productId);
-        saveCartToLocalStorage();
-        updateCartUI(productsData);
-    }
 }
