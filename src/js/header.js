@@ -4,30 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('nav');
     const cartMenu = document.getElementById('cart');
 
-    // Toggle navigation menu
+    // Toggle navigation menu and animate the bars
     navButton.addEventListener('click', () => {
-        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        cartMenu.style.display = 'none'; // Ocultar carrito si está abierto
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.add('closing');
+            setTimeout(() => {
+                navMenu.classList.remove('active', 'closing');
+            }, 500); // El tiempo debe coincidir con la duración de la animación
+        } else {
+            navMenu.classList.add('active');
+            cartMenu.classList.remove('active', 'closing'); // Asegura que el carrito esté cerrado
+        }
+        navButton.classList.toggle('active');
     });
 
     // Toggle cart menu
     cartButton.addEventListener('click', () => {
-        cartMenu.style.display = cartMenu.style.display === 'flex' ? 'none' : 'flex';
-        navMenu.style.display = 'none'; // Ocultar menú de navegación si está abierto
-    });
-
-    // Cerrar menús al hacer clic fuera
-    document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !navButton.contains(e.target)) {
-            navMenu.style.display = 'none';
-        }
-        if (!cartMenu.contains(e.target) && !cartButton.contains(e.target)) {
-            cartMenu.style.display = 'none';
+        if (cartMenu.classList.contains('active')) {
+            cartMenu.classList.add('closing');
+            setTimeout(() => {
+                cartMenu.classList.remove('active', 'closing');
+            }, 500);
+        } else {
+            cartMenu.classList.add('active');
+            navMenu.classList.remove('active', 'closing'); // Asegura que el nav esté cerrado
+            navButton.classList.remove('active');
         }
     });
-
-    document.querySelector('.btn-nav').addEventListener('click', function() {
-        this.classList.toggle('active');
-    });
-    
 });
