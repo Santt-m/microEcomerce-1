@@ -1,49 +1,61 @@
-/* Clases basicas generales */
-@import url(./assets/basic.css);
+/* import header */
+@import url(./src/css/header.css);
 
-/* clases header */
-@import url(/assets/header/header.css);
-@import url(/assets/nav/nav.css);
-/* cascada de index */
-@import url(/assets/index/index.css);
-
-
-/* import carrito styles */
-@import url(./assets/cart/cart.css);
-
-/* clases footer */
-@import url(./assets/footer/footer.css);
-
-/* style de js */
-@import url(./assets/css/js.css);
-
-/* fonts */
-
-/* roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-/* root */
+/* import hero */
+@import url(./src/css/hero.css);
 :root {
-    /* standard */
-    --bodycolor: #000;
-    --bodybackgroundcolor: #fff;
-
-    /* medidas estandar */
-    --std-borderRadius: 25px;
-    --std-borderColor: rgba(0, 0, 0, 0.5);
-    --std-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
-    
-    --std-letterSpacing: 1.5px;
-    --std-fontColor: white;
-
-    --std-btnHoverColor: rgb(44, 42, 42);
-    --std-btnHoverBackgroundColor: rgba(128, 128, 128, 0.178);
-    /* paleta de colores */
-
+    /* standard style */
+    --bodybackgroundcolor: #f4f4f4;
+    /* Paleta de colores */
     --primary-color: #42b883;
+    --primary-color-hover: #339a6d;
     --secondary-color: #347474;
-    --third-color: #1c1e21;
-    --quaternary-color: #05830f;
+    --secondary-color-hover: #2b5d5d;
+    --background-color: #f4f4f4;
+    --font-color: #333;
+    --font-color-light: #666;
+    --white-color: #fff;
+
+    /* Tipografía */
+    --font-size-small: 0.9em;
+    --font-size-medium: 1.1em;
+    --font-size-large: 1.5em;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height: 1.6;
+
+    /* Bordes y sombras */
+    --std-borderRadius: 10px;
+    --btn-borderRadius: 25px;
+    --std-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --hover-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+
+    /* Espaciados */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+    --spacing-xlarge: 32px;
+
+    /* Tamaños de botones */
+    --btn-padding: 10px 20px;
+    --btn-font-size: 1em;
+
+    /* Inputs */
+    --input-padding: 10px;
+    --input-border-color: #ccc;
+    --input-border-radius: 5px;
+
+    /* Filtros */
+    --filter-padding: 12px;
+    --filter-border-radius: 20px;
+
+    /* Productos */
+    --gap: 20px;
+
+    /* Botones de cantidad */
+    --quantity-button-padding: 10px;
+    --quantity-button-radius: 50%;
+    --quantity-button-font-size: 16px;
 }
 
 /* estandar style */
@@ -57,42 +69,62 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    color: var(--bodycolor);
-    background-color: var(--bodybackgroundcolor);
-
-
     font-family: "Roboto", sans-serif;
     font-weight: 400;
-    font-style: normal;
-}
-
-main{
-    width: 100%;
+    background-color: var(--background-color);
+    color: var(--font-color);
 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+a {
+    text-decoration: none;
+}
+
+main {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* anim de scroll */
 
-@keyframes show{
-    from{
+@keyframes show {
+    from {
         opacity: 0;
         scale: 25%;
     }
-    to{
+
+    to {
         opacity: 1;
         scale: 100%;
     }
 }
 
-section div li{
+section div li {
     view-timeline-name: --image;
     view-timeline-axis: block;
     animation-timeline: --image;

@@ -1,0 +1,168 @@
+/* Base styles for mobile devices */
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 10vh; /* Altura fija del header */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bodybackgroundcolor);
+    box-shadow: var(--std-box-shadow);
+    padding: 0 10px;
+}
+
+/* Logo */
+.headerLogo {
+    padding: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerLogo img {
+    height: 100%;
+}
+/* Nav button container */
+header .btn-nav-container {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Nav button */
+header .btn-nav, .btn-cart {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 5px;
+    transition: all 0.5s ease-in-out;
+}
+/* Estilos base del botón nav */
+.btn-nav {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+.bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+}
+
+/* Animación para convertir las barras en una "X" con la barra del medio desapareciendo */
+.bar:nth-child(1) {
+    top: 0;
+}
+
+.bar:nth-child(2) {
+    top: 12px;
+    transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.bar:nth-child(3) {
+    top: 24px;
+}
+
+/* Estado activo del botón (cuando se transforma en "X") */
+.btn-nav.active .bar:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+}
+
+.btn-nav.active .bar:nth-child(2) {
+    transform: scaleX(0); /* Barra del medio desaparece */
+}
+
+.btn-nav.active .bar:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+}
+
+
+
+/* Navigation */
+nav {
+    position: absolute;
+    top: 10vh; /* Desplegar debajo del header */
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bodybackgroundcolor);
+    box-shadow: var(--std-box-shadow);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 9; /* Debajo del header */
+}
+
+/* Cart */
+#cart {
+    position: absolute;
+    top: 10vh; /* Desplegar debajo del header */
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bodybackgroundcolor);
+    box-shadow: var(--std-box-shadow);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 9; /* Debajo del header */
+}
+
+#cart .cart-title {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Forms within the cart */
+#direccion-form, #pago-form {
+    width: 90%;
+    margin: 20px 0;
+}
+
+/* Styles for larger screens (tablets and desktops) */
+@media (min-width: 768px) {
+    header {
+        flex-direction: row;
+        padding: 0 20px;
+    }
+
+
+    /* Navigation */
+    nav {
+        height: auto;
+    }
+
+    /* Cart */
+    #cart {
+        height: auto;
+    }
+
+    #direccion-form, #pago-form {
+        width: 100%;
+    }
+}

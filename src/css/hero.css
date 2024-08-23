@@ -1,21 +1,24 @@
 #hero {
     width: 100%;
     min-height: 50vh;
+    padding: 10px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+
     color: white;
 }
 
 #hero .hero-desc {
+    width: 100%;
+    max-width: 800px;
+    height: 50%;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: var(--std-borderRadius);
     box-shadow: var(--std-box-shadow);
-    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -29,6 +32,7 @@
 }
 
 .hero-cont {
+    padding: 5px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -39,6 +43,12 @@
     border-radius: var(--std-borderRadius);
 }
 
+.hero-cont-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
 #horarios-container {
     width: 100%;
     margin-top: 20px;
@@ -49,9 +59,11 @@
 
 .horario-block {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+    flex-direction: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    gap: 15px;
 }
 
 #horarios-local, #horarios-envio {

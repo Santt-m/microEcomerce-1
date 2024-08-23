@@ -4,8 +4,8 @@
   "direccion": "Dirección de la empresa",
   "telefono": "123-456-7890",
   "whatsapp": "1234567890",
-  "logo": "./assets/images/logo.jpeg",
-  "imagenFondo": "./assets/images/img0.webp",
+  "logo": "./src/img/logo.jpeg",
+  "imagenFondo": "./src/img/hero_background.webp",
   "redesSociales": [
     {
       "name": "Google Maps",

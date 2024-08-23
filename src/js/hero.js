@@ -1,20 +1,22 @@
-export function createHeroSection(data) {
-    // Crear la sección hero y sus elementos internos
+export function createHeroSection(data, container) {
+    const { nombreEmpresa, descripcion, logo, direccion, telefono, imagenFondo } = data;
+
+    // Crear la sección hero
     const heroSection = document.createElement("section");
     heroSection.id = "hero";
-    heroSection.style.backgroundImage = `url(${data.imagenFondo})`;
+    heroSection.style.backgroundImage = `url(${imagenFondo})`;
 
     heroSection.innerHTML = `
         <div class="hero-desc">
-            <h1>${data.nombreEmpresa}</h1>
-            <p>${data.descripcion}</p>
+            <h1>${nombreEmpresa}</h1>
+            <p>${descripcion}</p>
             <div class="hero-cont">
                 <div class="hero-cont-img">
-                    <img src="${data.logo}" alt="Logo local">
+                    <img src="${logo}" alt="Logo local">
                 </div>
                 <div class="hero-cont-info">
-                    <p id="direccion">Dirección: ${data.direccion}</p>
-                    <p id="telefono">Teléfono: ${data.telefono}</p>
+                    <p id="direccion">Dirección: ${direccion}</p>
+                    <p id="telefono">Teléfono: ${telefono}</p>
                 </div>
                 <div id="horarios-container">
                     <div class="horario-block">
@@ -33,74 +35,77 @@ export function createHeroSection(data) {
         </div>
     `;
 
-    // Añadir la sección hero al body o a un contenedor específico
-    document.body.insertBefore(heroSection, document.body.firstChild);
+    // Insertar la sección hero dentro del contenedor <main id="app">
+    container.appendChild(heroSection);
 
-    // Llenar la información restante
     populateHeroSection(data);
 }
-
 function populateHeroSection(data) {
+    const { redesSociales, horarios } = data;
     const btnContainer = document.querySelector(".btn-container");
 
-    // Crear botones dinámicamente para cada red social
-    data.redesSociales.forEach(redSocial => {
+    // Crear los botones de redes sociales usando DocumentFragment
+    const fragment = document.createDocumentFragment();
+    redesSociales.forEach(redSocial => {
         if (redSocial.url) {
             const button = document.createElement("button");
             button.className = `btn-contact btn-${redSocial.name.toLowerCase()}`;
             button.textContent = redSocial.name;
             button.onclick = () => window.open(redSocial.url, "_blank");
-            btnContainer.appendChild(button);
+            fragment.appendChild(button);
         }
     });
+    btnContainer.appendChild(fragment);
 
     const horariosLocalSelect = document.getElementById("horarios-local");
     const horariosEnvioSelect = document.getElementById("horarios-envio");
+
+    // Llenar los selectores de horarios
+    fillHorariosSelect(horarios, horariosLocalSelect, horariosEnvioSelect);
+
+    // Verificar los estados actuales de local y envíos
     const estadoLocal = document.getElementById("estado-local");
     const estadoEnvio = document.getElementById("estado-envio");
+    verificarEstado(horariosLocalSelect.value, horarios, "local", estadoLocal);
+    verificarEstado(horariosEnvioSelect.value, horarios, "envio", estadoEnvio);
 
-    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    const hoy = new Date().getDay();
-    const diaActual = diasSemana[hoy];
-
-    // Rellenar horarios en los selects y establecer el día actual
-    data.horarios.forEach(horario => {
-        const optionLocal = document.createElement("option");
-        optionLocal.value = horario.dia;
-        optionLocal.textContent = `${horario.dia}: ${formatearHorario(horario.horarioLocal)}`;
-        if (horario.dia === diaActual) optionLocal.selected = true;
-        horariosLocalSelect.appendChild(optionLocal);
-
-        const optionEnvio = document.createElement("option");
-        optionEnvio.value = horario.dia;
-        if (horario.horarioEnvio) {
-            optionEnvio.textContent = `${horario.dia}: ${formatearHorario(horario.horarioEnvio)}`;
-        } else {
-            optionEnvio.textContent = `${horario.dia}: No disponible`;
-        }
-        if (horario.dia === diaActual) optionEnvio.selected = true;
-        horariosEnvioSelect.appendChild(optionEnvio);
-    });
-
-    // Verificar estado del local y de los envíos
-    verificarEstado(horariosLocalSelect.value, data.horarios, "local", estadoLocal);
-    verificarEstado(horariosEnvioSelect.value, data.horarios, "envio", estadoEnvio);
-
-    // Actualizar estado cuando se cambie el día
-    horariosLocalSelect.addEventListener("change", () => {
-        verificarEstado(horariosLocalSelect.value, data.horarios, "local", estadoLocal);
-    });
-    horariosEnvioSelect.addEventListener("change", () => {
-        verificarEstado(horariosEnvioSelect.value, data.horarios, "envio", estadoEnvio);
-    });
+    // Manejar los cambios en los selectores
+    horariosLocalSelect.addEventListener("change", () => verificarEstado(horariosLocalSelect.value, horarios, "local", estadoLocal));
+    horariosEnvioSelect.addEventListener("change", () => verificarEstado(horariosEnvioSelect.value, horarios, "envio", estadoEnvio));
 }
 
-// Formatear horario (convertir apertura/cierre en un string legible)
+function fillHorariosSelect(horarios, horariosLocalSelect, horariosEnvioSelect) {
+    const fragmentLocal = document.createDocumentFragment();
+    const fragmentEnvio = document.createDocumentFragment();
+    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const diaActual = diasSemana[new Date().getDay()];
+
+    horarios.forEach(horario => {
+        const { dia, horarioLocal, horarioEnvio } = horario;
+
+        // Local
+        const optionLocal = document.createElement("option");
+        optionLocal.value = dia;
+        optionLocal.textContent = `${dia}: ${formatearHorario(horarioLocal)}`;
+        if (dia === diaActual) optionLocal.selected = true;
+        fragmentLocal.appendChild(optionLocal);
+
+        // Envío
+        const optionEnvio = document.createElement("option");
+        optionEnvio.value = dia;
+        optionEnvio.textContent = horarioEnvio ? `${dia}: ${formatearHorario(horarioEnvio)}` : `${dia}: No disponible`;
+        if (dia === diaActual) optionEnvio.selected = true;
+        fragmentEnvio.appendChild(optionEnvio);
+    });
+
+    horariosLocalSelect.appendChild(fragmentLocal);
+    horariosEnvioSelect.appendChild(fragmentEnvio);
+}
+
 function formatearHorario(horario) {
     return `${horario.apertura} - ${horario.cierre}`;
 }
 
-// Verificar estado del local o envío
 function verificarEstado(dia, horarios, tipo, estadoElement) {
     const horarioHoy = horarios.find(horario => horario.dia === dia);
     if (!horarioHoy) return;
@@ -108,27 +113,22 @@ function verificarEstado(dia, horarios, tipo, estadoElement) {
     const horario = tipo === "local" ? horarioHoy.horarioLocal : horarioHoy.horarioEnvio;
     if (!horario) {
         estadoElement.textContent = tipo === "local" ? "Local cerrado" : "Envíos no disponibles";
-        estadoElement.classList.add("estado-cerrado");
+        estadoElement.className = "estado estado-cerrado";
         return;
     }
 
     const ahora = new Date();
-    const apertura = new Date();
-    const cierre = new Date();
+    const apertura = parseTime(horario.apertura);
+    const cierre = parseTime(horario.cierre);
 
-    const [aperturaHora, aperturaMin] = horario.apertura.split(":").map(Number);
-    const [cierreHora, cierreMin] = horario.cierre.split(":").map(Number);
-
-    apertura.setHours(aperturaHora, aperturaMin, 0, 0);
-    cierre.setHours(cierreHora, cierreMin, 0, 0);
-
-    estadoElement.classList.remove("estado-abierto", "estado-cerrado", "estado-pronto-cerrar");
-
+    estadoElement.className = "";
     if (ahora >= apertura && ahora <= cierre) {
         const minutosRestantes = (cierre - ahora) / (1000 * 60);
 
         if (minutosRestantes <= 30) {
-            estadoElement.textContent = tipo === "local" ? `Abierto, cerrará pronto (${Math.ceil(minutosRestantes)} minutos restantes)` : `Envíos disponibles, finalizarán pronto (${Math.ceil(minutosRestantes)} minutos restantes)`;
+            estadoElement.textContent = tipo === "local"
+                ? `Abierto, cerrará pronto (${Math.ceil(minutosRestantes)} minutos restantes)`
+                : `Envíos disponibles, finalizarán pronto (${Math.ceil(minutosRestantes)} minutos restantes)`;
             estadoElement.classList.add("estado-pronto-cerrar");
         } else {
             estadoElement.textContent = tipo === "local" ? "Abierto" : "Envíos disponibles";
@@ -138,4 +138,11 @@ function verificarEstado(dia, horarios, tipo, estadoElement) {
         estadoElement.textContent = tipo === "local" ? "Local cerrado" : "No se realizan envíos";
         estadoElement.classList.add("estado-cerrado");
     }
+}
+
+function parseTime(timeString) {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
 }
