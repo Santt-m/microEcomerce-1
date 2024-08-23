@@ -19,19 +19,64 @@
         
         <div id="cart">
             <div class="cart-title">
-                <button>Carrito</button>
-                <button>Dirección</button>
-                <button>Pago</button>
+                <button id="show-cart">Carrito</button>
+                <button id="show-direccion">Dirección</button>
+                <button id="show-pago">Pago</button>
             </div>
-            <ol id="cart-items"></ol>
-            <div id="direccion-form">
-                <!-- formulario de direccion -->
+            <!-- Sección del carrito -->
+            <div id="cart-content">
+                <ol id="cart-items"></ol>
+                <div class="cart-summary">
+                    <p>Total productos: <span id="total-items">0</span></p>
+                    <p>Total precio: $<span id="total-price">0</span></p>
+                </div>
+                <button id="clear-cart">Vaciar carrito</button>
             </div>
-            <div id="pago-form">
-                <!-- formulario de pago -->
+
+            <!-- Formulario de dirección -->
+            <div id="direccion-form" class="hidden">
+                <form>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                    
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" required>
+                    
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" required>
+                    
+                    <label for="tipo-entrega">Tipo de entrega:</label>
+                    <select id="tipo-entrega" required>
+                        <option value="local">Pasar a buscar</option>
+                        <option value="envio">Envío a domicilio</option>
+                    </select>
+
+                    <div id="direccion-envio" class="hidden">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" id="direccion">
+
+                        <label for="numero">Número:</label>
+                        <input type="text" id="numero">
+
+                        <label for="piso">Piso:</label>
+                        <input type="text" id="piso">
+
+                        <label for="departamento">Departamento:</label>
+                        <input type="text" id="departamento">
+
+                        <label for="notas">Notas adicionales:</label>
+                        <textarea id="notas"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resumen de pago -->
+            <div id="pago-form" class="hidden">
+                <h3>Resumen de Pedido</h3>
+                <div id="resumen-pedido"></div>
             </div>
         </div>
-        
+
         <div class="btn-nav-container">
             <div class="btn-nav">
                 <div class="bar"></div>

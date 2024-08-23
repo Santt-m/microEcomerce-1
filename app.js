@@ -1,6 +1,7 @@
 import { createHeroSection } from './src/js/hero.js';
 import './src/js/header.js';
-
+import './src/js/product.js';
+import './src/js/cart.js'; // Importamos el sistema de carrito
 
 // Función para cargar un archivo JSON desde una ruta específica
 async function cargarJSON(url) {
@@ -35,5 +36,8 @@ async function initApp() {
 
 // Inicializar la aplicación cuando el contenido del DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    initApp();
+    initApp(); // Cargamos los datos de la empresa y los scripts de héroe
+
+    // Inicializar el sistema de carrito
+    cargarCarrito(); // Cargamos el carrito desde el localStorage y actualizamos la UI
 });

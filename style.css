@@ -3,6 +3,10 @@
 
 /* import hero */
 @import url(./src/css/hero.css);
+
+/* import product */
+@import url(./src/css/product.css);
+
 :root {
     /* standard style */
     --bodybackgroundcolor: #f4f4f4;
