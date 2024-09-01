@@ -1,3 +1,5 @@
+import { agregarProductoAlCarrito, restarProductoDelCarrito, obtenerCantidadEnCarrito } from './cart.js';
+
 // Función para cargar el JSON de productos
 async function cargarProductos() {
     try {
@@ -13,11 +15,10 @@ async function cargarProductos() {
 }
 
 // Función para generar las secciones y filtros dinámicos
-function generarSecciones(productos) {
+export function generarSecciones(productos) {
     const appContainer = document.getElementById('app');
     const productosPorTipo = agruparPor(productos, 'type');
 
-    // Crear el modal de filtro de precios dinámicamente
     crearModalFiltroPrecios();
 
     for (const [tipo, productosDeTipo] of Object.entries(productosPorTipo)) {
@@ -52,7 +53,6 @@ function generarSecciones(productos) {
 
         filterContainer.appendChild(searchInput);
 
-        // Botón de Filtrar por Precio
         const priceFilterButton = document.createElement('button');
         priceFilterButton.textContent = 'Filtrar por precio';
         priceFilterButton.onclick = () => abrirVentanaModal(section, productosDeTipo);
@@ -192,15 +192,29 @@ function crearProductCard(producto) {
         <h3>${producto.name}</h3>
         <p>${producto.description}</p>
         <p>Precio: $${producto.price}</p>
+        <div class="product-controls">
+            <button class="btn-restar" data-id="${producto.id}">-</button>
+            <span id="cantidad-producto-${producto.id}">${obtenerCantidadEnCarrito(producto.id)}</span>
+            <button class="btn-sumar" data-id="${producto.id}">+</button>
+        </div>
     `;
-    
+
+    // Añadir eventos a los botones de incrementar y restar
+    card.querySelector('.btn-sumar').addEventListener('click', () => {
+        agregarProductoAlCarrito(producto);
+        actualizarCantidadUI(producto.id);
+    });
+
+    card.querySelector('.btn-restar').addEventListener('click', () => {
+        restarProductoDelCarrito(producto.id);
+        actualizarCantidadUI(producto.id);
+    });
+
     return card;
 }
 
-// Inicializar las secciones cuando el contenido del DOM esté listo
-document.addEventListener('DOMContentLoaded', async () => {
-    const productos = await cargarProductos();
-    if (productos) {
-        generarSecciones(productos);
-    }
-});
+// Función para actualizar el span con la cantidad de productos
+export function actualizarCantidadUI(idProducto) {
+    const cantidad = obtenerCantidadEnCarrito(idProducto);
+    document.getElementById(`cantidad-producto-${idProducto}`).textContent = cantidad;
+}

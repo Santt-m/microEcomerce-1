@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     const navButton = document.querySelector('.btn-nav');
     const cartButton = document.querySelector('.btn-cart');
     const navMenu = document.querySelector('nav');
@@ -31,4 +30,3 @@ document.addEventListener('DOMContentLoaded', () => {
             navButton.classList.remove('active');
         }
     });
-});
