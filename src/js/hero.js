@@ -2,7 +2,7 @@ export function createHeroSection(data, container) {
     const { nombreEmpresa, descripcion, logo, direccion, telefono, imagenFondo } = data;
 
     // Crear la sección hero
-    const heroSection = document.createElement("section");
+    const heroSection = container;
     heroSection.id = "hero";
     heroSection.style.backgroundImage = `url(${imagenFondo})`;
 
@@ -34,9 +34,6 @@ export function createHeroSection(data, container) {
             </div>
         </div>
     `;
-
-    // Insertar la sección hero dentro del contenedor <main id="app">
-    container.appendChild(heroSection);
 
     populateHeroSection(data);
 }

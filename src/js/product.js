@@ -1,18 +1,5 @@
 import { agregarProductoAlCarrito, restarProductoDelCarrito, obtenerCantidadEnCarrito } from './cart.js';
 
-// Función para cargar el JSON de productos
-async function cargarProductos() {
-    try {
-        const response = await fetch('./db/productData.json');
-        if (!response.ok) {
-            throw new Error(`Error al cargar los productos: ${response.statusText}`);
-        }
-        const productos = await response.json();
-        return productos;
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 // Función para generar las secciones y filtros dinámicos
 export function generarSecciones(productos) {

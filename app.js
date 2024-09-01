@@ -30,12 +30,12 @@ async function initApp() {
 
         if (appContainer) {
             // Crear contenedor para el hero y renderizarlo primero
-            const heroContainer = document.createElement('div');
-            heroContainer.id = 'hero-container';
+            const heroContainer = document.createElement('section');
+            heroContainer.id = 'hero';
             appContainer.appendChild(heroContainer);
 
             // Crear contenedor para los productos
-            const productContainer = document.createElement('div');
+            const productContainer = document.createElement('section');
             productContainer.id = 'product-container';
             appContainer.appendChild(productContainer);
 
