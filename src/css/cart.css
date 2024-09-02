@@ -11,7 +11,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     z-index: 10;
     overflow-y: auto;
@@ -112,25 +112,33 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .btn-restar{
-    font-weight: 900;
-    background-color: rgb(0, 17, 255);
+    border: 2px solid grey;
+    border-radius: 15px 0px 0px 15px;
+    padding: 12px;
+    cursor: pointer;
+}
+.btn-restar:hover{
+    background-color: green;
     color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+}
+
+.cart-controls span{
+    border: 2px solid grey;
+    padding: 10px;
     cursor: pointer;
 }
 .btn-sumar{
-    font-weight: 900;
-    background-color: rgb(11, 131, 0);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+    border: 2px solid grey;
+    border-radius: 0px 15px 15px 0px;
+    padding: 12px;
     cursor: pointer;
+}
+.btn-sumar:hover{
+    background-color: green;
+    color: white;
 }
 button.remove-item {
     height: 30px;
@@ -171,23 +179,47 @@ button.remove-item:hover {
     flex-wrap: wrap;
 }
 #direccion-form label{
-    width: 40%;
+    width: 30%;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 #direccion-form input{
     width: 50%;
+    height: 50px;
+
+    border-radius: 20px;
 }
-fieldset{
+
+#direccion-form fieldset{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 10px;
+    padding: 10px;
+}
+#direccion-form fieldset input[type="radio"]{
+    width: 10%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+#direccion-form fieldset label{
     width: 80%;
 }
 
 /* form cliente */
 #cliente-form{
     width: 100%;
-
+    height: 60%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 5px;
 }
 
 #cliente-form label{
@@ -199,27 +231,56 @@ fieldset{
 }
 
 
+/* formulario direccion-envio */
 
 #direccion-envio {
+    width: 100%;
     margin-top: 20px;
     display: none;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
+    padding: 10px;
+}
+#direccion-envio label{
+    width: 40%;
+    height: 50px;
+}
+#direccion-envio input{
+    width: 50%;
+    height: 50px;
 }
 
 textarea {
     resize: vertical;
+    width: 100%;
+    height: 100px;
 }
 
 /* Resumen de pago */
+#pago-form {
+    width: 100%;
+    height: 80%;
+
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+}
 #pago-form h3 {
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 5px;
     text-align: center;
+
+    text-wrap: break-word;
 }
 
 #resumen-pedido {
+    width: 100%;
+    overflow-y: auto;
     background-color: #fff;
-    padding: 15px;
+    padding: 5px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

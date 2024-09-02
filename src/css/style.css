@@ -1,24 +1,49 @@
-@import url(./type.css);
-@import url(./promos.css);
+@import url(./header.css);
+@import url(cart.css);
 @import url(./hero.css);
+@import url(./product.css);
+@import url(./promos.css);
+
 :root {
   /* Paleta de colores */
+  --bodybackgroundcolor: #f4f4f4;
+  --background-color: #f4f4f4;
+
   --primary-color: #42b883;
   --primary-color-hover: #339a6d;
+  
   --secondary-color: #347474;
   --secondary-color-hover: #2b5d5d;
-  --background-color: #f4f4f4;
-  --font-color: #333;
-  --font-color-light: #666;
+
+  
+
   --white-color: #fff;
 
   /* Tipografía */
-  --font-size-small: 0.9em;
-  --font-size-medium: 1.1em;
-  --font-size-large: 1.5em;
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
-  --line-height: 1.6;
+  --font-color: #333;
+  --font-color-light: #666;
+
+  --primary-font-size: 2em;
+  --primary-font-weight: 600;
+  --primary-lletter-spacing: 1.5px;
+
+  --secondary-font-size: 1.5em;
+  --secondary-font-weight: 400;
+  --secondary-letter-spacing: 1px;
+
+  --font-color-p:  #333;
+  --p-letter-spacing: 1.5px;
+
+
+  --font-size-h3: 2em;
+  --font-size-h4: 1.1em;
+  --font-size-h5: 1.5em;
+  --font-size-p:  0.9em;
+
+  --font-weight-h3: 700;
+  --font-weight-h4: 500;
+  --font-height-h5: 400;
+  --font-weight-p: 500;
 
   /* Bordes y sombras */
   --std-borderRadius: 10px;
@@ -26,29 +51,6 @@
   --std-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   --hover-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 
-  /* Espaciados */
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
-  --spacing-large: 24px;
-  --spacing-xlarge: 32px;
-
-  /* Tamaños de botones */
-  --btn-padding: 10px 20px;
-  --btn-font-size: 1em;
-  
-  /* Inputs */
-  --input-padding: 10px;
-  --input-border-color: #ccc;
-  --input-border-radius: 5px;
-  
-  /* Filtros */
-  --filter-padding: 12px;
-  --filter-border-radius: 20px;
-  
-  /* Productos */
-  --products-grid-gap: 20px;
-  --products-image-height: 150px;
-  
   /* Botones de cantidad */
   --quantity-button-padding: 10px;
   --quantity-button-radius: 50%;
@@ -62,6 +64,8 @@
 }
 
 body {
+  width: 100%;
+
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   background-color: var(--background-color);
@@ -73,7 +77,8 @@ a {
 }
 
 main {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
 
   display: flex;

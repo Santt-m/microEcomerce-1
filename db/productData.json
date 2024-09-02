@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "type": "food",
+    "type": "comida",
     "tag": ["Brochetas"],
     "name": "Brochetas",
     "description": "Brochetas frescas con rúcula, queso y tomate cherry, sazonadas con orégano. Perfectas para un bocado saludable.",
@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "type": "food",
+    "type": "comida",
     "tag": ["Pastas"],
     "name": "Ñoquis de espinaca",
     "description": "Ñoquis caseros hechos con espinaca fresca. Un plato lleno de sabor y nutrientes.",
@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "type": "food",
+    "type": "comida",
     "tag": ["Pastas"],
     "name": "Ñoquis de remolacha",
     "description": "Ñoquis de remolacha, suaves y coloridos, con un toque dulce y terroso. ¡Ideal para algo diferente!",
@@ -34,7 +34,7 @@
   },
   {
     "id": 4,
-    "type": "food",
+    "type": "comida",
     "tag": ["Tartas"],
     "name": "Tarta de verdura",
     "description": "Tarta de verdura con masa casera, queso gratinado y una mezcla de acelga, cebolla y pimientos.",
@@ -45,7 +45,7 @@
   },
   {
     "id": 5,
-    "type": "food",
+    "type": "comida",
     "tag": [],
     "name": "Aros de cebolla",
     "description": "Crocantes aros de cebolla, fritos a la perfección. Un snack irresistible.",
@@ -56,7 +56,7 @@
   },
   {
     "id": 6,
-    "type": "food",
+    "type": "comida",
     "tag": ["Entradas"],
     "name": "Papas fritas",
     "description": "Papas fritas doradas y crujientes. El acompañamiento perfecto para cualquier comida.",
@@ -67,7 +67,7 @@
   },
   {
     "id": 7,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Tarta Frutal individual",
     "description": "Tarta frutal individual con una base crujiente y un relleno cremoso, decorada con frutas frescas.",
@@ -78,7 +78,7 @@
   },
   {
     "id": 8,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Tarta Frutal Grande",
     "description": "Tarta frutal grande, ideal para compartir, con frutas frescas y una base crujiente.",
@@ -89,7 +89,7 @@
   },
   {
     "id": 9,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Tarta Frutal Mediana",
     "description": "Tarta frutal mediana, equilibrada en tamaño y sabor, con una mezcla de frutas frescas.",
@@ -100,7 +100,7 @@
   },
   {
     "id": 10,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
     "description": "Pasta Frola grande con dulce de membrillo y una masa suave. Un clásico irresistible.",
@@ -111,7 +111,7 @@
   },
   {
     "id": 11,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Pasta Frola chica",
     "description": "Pasta Frola chica con dulce de membrillo, perfecta para un postre individual.",
@@ -122,7 +122,7 @@
   },
   {
     "id": 12,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Pasta Frola grande",
     "description": "Pasta Frola grande con masa casera y relleno de dulce de membrillo. Ideal para compartir.",
@@ -133,7 +133,7 @@
   },
   {
     "id": 13,
-    "type": "food",
+    "type": "comida",
     "tag": ["Postres"],
     "name": "Tarta de ricota chica",
     "description": "Tarta de ricota chica, suave y cremosa, con un toque de limón. Perfecta para un bocado dulce.",
@@ -144,7 +144,7 @@
   },
   {
     "id": 14,
-    "type": "drink",
+    "type": "bebidas",
     "tag": ["Refrescos"],
     "name": "Coca Cola",
     "description": "Refresco de cola.",
@@ -155,7 +155,7 @@
   },
   {
     "id": 15,
-    "type": "drink",
+    "type": "bebidas",
     "tag": ["Refrescos"],
     "name": "Pepsi",
     "description": "Refresco de cola.",
@@ -166,7 +166,7 @@
   },
   {
     "id": 16,
-    "type": "drink",
+    "type": "bebidas",
     "tag": ["Cerveza"],
     "name": "Corona",
     "description": "Cerveza rubia mexicana.",
@@ -177,7 +177,7 @@
   },
   {
     "id": 17,
-    "type": "drink",
+    "type": "bebidas",
     "tag": ["Cerveza"],
     "name": "Heineken",
     "description": "Cerveza rubia holandesa.",
@@ -188,7 +188,7 @@
   },
   {
     "id": 18,
-    "type": "drink",
+    "type": "bebidas",
     "tag": ["Jugos"],
     "name": "Jugo de Naranja",
     "description": "Jugo natural de naranja.",

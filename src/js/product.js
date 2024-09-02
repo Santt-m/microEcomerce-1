@@ -1,5 +1,4 @@
-import { agregarProductoAlCarrito, restarProductoDelCarrito, obtenerCantidadEnCarrito } from './cart.js';
-
+import { agregarProductoAlCarrito, restarProductoDelCarrito, obtenerCantidadEnCarrito, actualizarTodosLosSpan } from './cart.js';
 
 // Función para generar las secciones y filtros dinámicos
 export function generarSecciones(productos) {
@@ -178,7 +177,7 @@ function crearProductCard(producto) {
         <img src="${producto.image}" alt="${producto.name}">
         <h3>${producto.name}</h3>
         <p>${producto.description}</p>
-        <p>Precio: $${producto.price}</p>
+        <p>$ ${producto.price}</p>
         <div class="product-controls">
             <button class="btn-restar" data-id="${producto.id}">-</button>
             <span id="cantidad-producto-${producto.id}">${obtenerCantidadEnCarrito(producto.id)}</span>
@@ -189,12 +188,10 @@ function crearProductCard(producto) {
     // Añadir eventos a los botones de incrementar y restar
     card.querySelector('.btn-sumar').addEventListener('click', () => {
         agregarProductoAlCarrito(producto);
-        actualizarCantidadUI(producto.id);
     });
 
     card.querySelector('.btn-restar').addEventListener('click', () => {
         restarProductoDelCarrito(producto.id);
-        actualizarCantidadUI(producto.id);
     });
 
     return card;
@@ -203,5 +200,11 @@ function crearProductCard(producto) {
 // Función para actualizar el span con la cantidad de productos
 export function actualizarCantidadUI(idProducto) {
     const cantidad = obtenerCantidadEnCarrito(idProducto);
-    document.getElementById(`cantidad-producto-${idProducto}`).textContent = cantidad;
+    const cantidadSpan = document.getElementById(`cantidad-producto-${idProducto}`);
+    
+    if (cantidadSpan) {
+        cantidadSpan.textContent = cantidad;
+    } else {
+        console.error(`No se encontró el elemento span para el producto con ID: ${idProducto}`);
+    }
 }

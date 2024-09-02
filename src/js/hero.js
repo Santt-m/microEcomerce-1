@@ -8,6 +8,7 @@ export function createHeroSection(data, container) {
 
     heroSection.innerHTML = `
         <div class="hero-desc">
+            <div class="btn-container"></div>
             <h1>${nombreEmpresa}</h1>
             <p>${descripcion}</p>
             <div class="hero-cont">
@@ -29,7 +30,7 @@ export function createHeroSection(data, container) {
                         <select id="horarios-envio"></select>
                         <p id="estado-envio" class="estado"></p>
                     </div>
-                    <div class="btn-container"></div>
+                    
                 </div>
             </div>
         </div>
@@ -39,20 +40,38 @@ export function createHeroSection(data, container) {
 }
 function populateHeroSection(data) {
     const { redesSociales, horarios } = data;
+    
+
+    // Crear los botones de redes sociales
     const btnContainer = document.querySelector(".btn-container");
 
-    // Crear los botones de redes sociales usando DocumentFragment
-    const fragment = document.createDocumentFragment();
     redesSociales.forEach(redSocial => {
         if (redSocial.url) {
             const button = document.createElement("button");
             button.className = `btn-contact btn-${redSocial.name.toLowerCase()}`;
-            button.textContent = redSocial.name;
+
+            // Crear imagen para el icono
+            const img = document.createElement("img");
+            img.src = redSocial.icon;
+            img.alt = redSocial.name;
+
+            // Manejar el caso donde la imagen no se carga (archivo no encontrado o URL incorrecta)
+            img.onerror = () => {
+                // Si hay un error al cargar la imagen, mostramos el texto en lugar del icono
+                img.remove();
+                button.textContent = redSocial.name;
+            };
+
+            // Añadir la imagen (icono) al botón
+            button.appendChild(img);
+
+            // Establecer el comportamiento del botón al hacer clic
             button.onclick = () => window.open(redSocial.url, "_blank");
-            fragment.appendChild(button);
+
+            // Añadir el botón al contenedor
+            btnContainer.appendChild(button);
         }
     });
-    btnContainer.appendChild(fragment);
 
     const horariosLocalSelect = document.getElementById("horarios-local");
     const horariosEnvioSelect = document.getElementById("horarios-envio");

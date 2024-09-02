@@ -10,7 +10,18 @@ export function initCarrito() {
     asignarEventosCarrito();
     actualizarGloboCarrito();
 }
+// Función para actualizar el globo del carrito
+function actualizarGloboCarrito() {
+    const totalProductos = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    const globoCarrito = document.getElementById('cart-bubble');
 
+    if (totalProductos > 0) {
+        globoCarrito.style.display = 'flex';
+        globoCarrito.textContent = totalProductos;
+    } else {
+        globoCarrito.style.display = 'none';
+    }
+}
 function cargarCarritoDesdeStorage() {
     const carritoGuardado = localStorage.getItem('carrito');
     if (carritoGuardado) carrito = JSON.parse(carritoGuardado);
@@ -18,6 +29,7 @@ function cargarCarritoDesdeStorage() {
 
 function guardarCarritoEnStorage() {
     localStorage.setItem('carrito', JSON.stringify(carrito));
+    
 }
 
 export function agregarProductoAlCarrito(producto) {
@@ -32,6 +44,7 @@ export function agregarProductoAlCarrito(producto) {
     guardarCarritoEnStorage();
     actualizarCantidadUI(producto.id);
     actualizarGloboCarrito();
+    actualizarTodosLosSpan();
 }
 
 export function restarProductoDelCarrito(idProducto) {
@@ -46,6 +59,7 @@ export function restarProductoDelCarrito(idProducto) {
     guardarCarritoEnStorage();
     actualizarCantidadUI(idProducto);
     actualizarGloboCarrito();
+    actualizarTodosLosSpan();
 }
 
 export function obtenerCantidadEnCarrito(idProducto) {
@@ -59,6 +73,7 @@ function eliminarProductoDelCarrito(idProducto) {
     guardarCarritoEnStorage();
     actualizarCantidadUI(idProducto);
     actualizarGloboCarrito();
+    actualizarTodosLosSpan();
 }
 
 function actualizarCarritoUI() {
@@ -185,15 +200,16 @@ function mostrarSeccion(seccionID) {
     document.getElementById(seccionID).style.display = 'flex';
 }
 
-// Función para actualizar el globo del carrito
-function actualizarGloboCarrito() {
-    const totalProductos = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    const globoCarrito = document.getElementById('cart-bubble');
+export function actualizarTodosLosSpan() {
+    carrito.forEach(item => {
+        const productQuantitySpan = document.getElementById(`cantidad-producto-${item.id}`);
+        if (productQuantitySpan) {
+            productQuantitySpan.textContent = item.cantidad;
+        }
 
-    if (totalProductos > 0) {
-        globoCarrito.style.display = 'flex';
-        globoCarrito.textContent = totalProductos;
-    } else {
-        globoCarrito.style.display = 'none';
-    }
+        const cartQuantitySpan = document.getElementById(`cantidad-carrito-${item.id}`);
+        if (cartQuantitySpan) {
+            cartQuantitySpan.textContent = item.cantidad;
+        }
+    });
 }

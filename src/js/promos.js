@@ -1,4 +1,4 @@
-import { addToCart, lessToCart } from './cart.js';
+import { agregarProductoAlCarrito, restarProductoDelCarrito, obtenerCantidadEnCarrito } from './cart.js';
 
 export function renderPromos(data) {
     const promoProducts = data.filter(product => product.promo === true);
@@ -23,23 +23,6 @@ function createPromoSection(promoProducts) {
     });
 
     appElement.appendChild(promoSection);
-
-    promosContainer.promoProducts = promoProducts;
-    promosContainer.addEventListener('click', handlePromoActions);
-}
-
-function handlePromoActions(event) {
-    const target = event.target;
-    const productId = target.getAttribute('data-id');
-    const promoProducts = event.currentTarget.promoProducts;
-
-    if (!promoProducts) return;
-
-    if (target.classList.contains('add-to-cart')) {
-        addToCart(productId, promoProducts);
-    } else if (target.classList.contains('less-to-cart')) {
-        lessToCart(productId, promoProducts);
-    }
 }
 
 function createPromoProductItem(product) {
@@ -54,25 +37,38 @@ function createPromoProductItem(product) {
     productInfo.innerHTML = `
         <h3>${product.name}</h3>
         <span>$${product.price}</span>
-        <div class="quantity-controls" style="display: none;">
-            <button class="less-to-cart" data-id="${product.id}">-</button>
-            <span class="product-quantity" data-id="${product.id}">0</span>
-            <button class="add-to-cart" data-id="${product.id}">+</button>
+        <div class="promos-product-controls" style="display: none;">
+            <button class="btn-restar" data-id="${product.id}">-</button>
+            <span id="cantidad-producto-${product.id}">${obtenerCantidadEnCarrito(product.id)}</span>
+            <button class="btn-sumar" data-id="${product.id}">+</button>
         </div>
     `;
 
+    const promosProductControls = productInfo.querySelector('.promos-product-controls');
+
+    // Acción para mostrar y ocultar promos-product-controls
     productInfo.addEventListener('mouseover', () => {
-        productInfo.querySelector('.quantity-controls').style.display = 'flex';
+        promosProductControls.style.display = 'flex';
     });
 
     productInfo.addEventListener('mouseout', () => {
-        productInfo.querySelector('.quantity-controls').style.display = 'none';
+        promosProductControls.style.display = 'none';
+    });
+
+    // Añadir eventos a los botones de incrementar y restar
+    productInfo.querySelector('.btn-sumar').addEventListener('click', () => {
+        agregarProductoAlCarrito(product);
+    });
+
+    productInfo.querySelector('.btn-restar').addEventListener('click', () => {
+        restarProductoDelCarrito(product.id);
     });
 
     li.appendChild(productInfo);
     return li;
 }
 
+// Función para iniciar el scroll automático de la sección de promociones
 function startAutoScroll() {
     const promosContainer = document.getElementById('promos-container');
     const scrollAmount = 200;

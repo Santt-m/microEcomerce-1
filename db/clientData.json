@@ -8,23 +8,28 @@
   "imagenFondo": "./src/img/hero_background.webp",
   "redesSociales": [
     {
-      "name": "Google Maps",
+      "name": "Google-Maps",
+      "icon": "../src/icons/map-solid.svg",
       "url": "https://www.google.com/maps/place/Direccion+de+la+empresa"
     },
     {
       "name": "Instagram",
+      "icon": "../src/icons/instagram-brands-solid.svg",
       "url": "https://www.instagram.com/nombre_de_la_empresa/"
     },
     {
       "name": "Facebook",
+      "icon": "../src/icons/facebook-brands-solid.svg",
       "url": "https://www.facebook.com/nombre_de_la_empresa/"
     },
     {
       "name": "Twitter",
+      "icon": "../src/icons/twitter-brands-solid.svg",
       "url": "https://twitter.com/nombre_de_la_empresa"
     },
     {
       "name": "WhatsApp",
+      "icon": "../src/icons/whatsapp-brands-solid.svg",
       "url": "https://wa.me/1234567890"
     }
   ],
