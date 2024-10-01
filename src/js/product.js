@@ -139,7 +139,7 @@ function agruparPor(array, propiedad) {
 // Función para mostrar todos los productos
 function mostrarProductos(section, productos) {
     const productContainer = section.querySelector('.product-container');
-    productContainer.innerHTML = ''; // Limpiar productos actuales
+    productContainer.innerHTML = '';
     productos.forEach(producto => {
         const productCard = crearProductCard(producto);
         productContainer.appendChild(productCard);

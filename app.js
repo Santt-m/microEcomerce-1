@@ -46,7 +46,7 @@ async function initApp() {
       console.log("Secciones renderizadas");
     
         
-    initCarrito();
+    initCarrito(datosEmpresa);
     console.log("Carrito inicializado");
       
       console.log("Aplicación lista");

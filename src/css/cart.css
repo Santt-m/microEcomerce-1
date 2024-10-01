@@ -311,6 +311,21 @@ textarea {
     height: 20px;
 }
 
+.pedido-whatsapp {
+    display: inline-block;
+    background-color: #25D366; /* Color verde de WhatsApp */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.pedido-whatsapp:hover {
+    background-color: #128C7E; /* Color más oscuro al pasar el mouse */
+}
+
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
 
