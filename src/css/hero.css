@@ -1,3 +1,4 @@
+/* Hero Section */
 #hero {
     width: 100%;
     min-height: 50vh;
@@ -7,7 +8,6 @@
     background-position: center;
     display: flex;
     flex-direction: column;
-
     color: white;
 }
 
@@ -49,6 +49,8 @@
     justify-content: center;
     gap: 10px;
 }
+
+/* Horarios */
 #horarios-container {
     width: 100%;
     margin-top: 20px;
@@ -59,18 +61,8 @@
 
 .horario-block {
     display: flex;
-    flex-direction: wrap;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: start;
     gap: 15px;
-}
-
-#horarios-local, #horarios-envio {
-    padding: 10px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    border: 1px solid #ddd;
 }
 
 .estado {
@@ -91,6 +83,53 @@
     color: #ffc107;
 }
 
+/* Botón de "Ver Horarios" */
+.btn-horarios {
+    max-width: 200px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-horarios:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Estilos para la tabla dentro del modal */
+.modal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.modal-content table th,
+.modal-content table td {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+}
+
+.modal-content table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-content table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.modal-content table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botones de redes sociales */
 .btn-container {
     display: flex;
     gap: 10px;
@@ -105,11 +144,11 @@
     border: none;
     color: white;
     font-size: var(--secondary-font-size);
-    font-weight: var(--secondary-font-weigh);
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .btn-contact img {
     width: 15px;
 }
@@ -117,7 +156,6 @@
 /* WhatsApp */
 .btn-whatsapp {
     background-color: #25d366;
-    transition: all 0.3s ease;
 }
 
 .btn-whatsapp:hover {
@@ -127,7 +165,6 @@
 /* Google Maps */
 .btn-google-maps {
     background-color: #810ece;
-    transition: all 0.3s ease;
 }
 
 .btn-google-maps:hover {
@@ -137,7 +174,6 @@
 /* Instagram */
 .btn-instagram {
     background-color: #E1306C;
-    transition: all 0.3s ease;
 }
 
 .btn-instagram:hover {
@@ -147,7 +183,6 @@
 /* Facebook */
 .btn-facebook {
     background-color: #3b5998;
-    transition: all 0.3s ease;
 }
 
 .btn-facebook:hover {
@@ -157,14 +192,8 @@
 /* Twitter */
 .btn-twitter {
     background-color: #1DA1F2;
-    transition: all 0.3s ease;
 }
 
 .btn-twitter:hover {
     background-color: #0d8de1;
 }
-
-
-
-
-/* Otros estilos de botones de redes sociales siguen el mismo patrón */

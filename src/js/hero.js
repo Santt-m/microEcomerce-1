@@ -1,3 +1,6 @@
+// Importar la clase Modal
+import Modal from './modal.js';
+
 export function createHeroSection(data, container) {
     const { nombreEmpresa, descripcion, logo, direccion, telefono, imagenFondo } = data;
 
@@ -8,7 +11,7 @@ export function createHeroSection(data, container) {
 
     heroSection.innerHTML = `
         <div class="hero-desc">
-            <div class="btn-container"></div>
+            <div class="btn-container"></div> <!-- Botones de redes sociales -->
             <h1>${nombreEmpresa}</h1>
             <p>${descripcion}</p>
             <div class="hero-cont">
@@ -21,26 +24,30 @@ export function createHeroSection(data, container) {
                 </div>
                 <div id="horarios-container">
                     <div class="horario-block">
-                        <label for="horarios-local">Horario del Local:</label>
-                        <select id="horarios-local"></select>
+                        <label>Estado del Local:</label>
                         <p id="estado-local" class="estado"></p>
                     </div>
                     <div class="horario-block">
-                        <label for="horarios-envio">Horario de Envíos:</label>
-                        <select id="horarios-envio"></select>
+                        <label>Estado de Envíos:</label>
                         <p id="estado-envio" class="estado"></p>
                     </div>
-                    
+                    <button id="btn-horarios" class="btn-horarios">Ver horarios</button>
                 </div>
             </div>
         </div>
     `;
 
     populateHeroSection(data);
+
+    // Asignar evento al botón de ver horarios
+    const btnHorarios = document.getElementById("btn-horarios");
+    btnHorarios.addEventListener("click", () => {
+        mostrarModalHorarios(data.horarios);  // Mostrar el modal con la tabla de horarios
+    });
 }
+
 function populateHeroSection(data) {
     const { redesSociales, horarios } = data;
-    
 
     // Crear los botones de redes sociales
     const btnContainer = document.querySelector(".btn-container");
@@ -57,7 +64,6 @@ function populateHeroSection(data) {
 
             // Manejar el caso donde la imagen no se carga (archivo no encontrado o URL incorrecta)
             img.onerror = () => {
-                // Si hay un error al cargar la imagen, mostramos el texto en lugar del icono
                 img.remove();
                 button.textContent = redSocial.name;
             };
@@ -73,63 +79,30 @@ function populateHeroSection(data) {
         }
     });
 
-    const horariosLocalSelect = document.getElementById("horarios-local");
-    const horariosEnvioSelect = document.getElementById("horarios-envio");
-
-    // Llenar los selectores de horarios
-    fillHorariosSelect(horarios, horariosLocalSelect, horariosEnvioSelect);
-
     // Verificar los estados actuales de local y envíos
     const estadoLocal = document.getElementById("estado-local");
     const estadoEnvio = document.getElementById("estado-envio");
-    verificarEstado(horariosLocalSelect.value, horarios, "local", estadoLocal);
-    verificarEstado(horariosEnvioSelect.value, horarios, "envio", estadoEnvio);
-
-    // Manejar los cambios en los selectores
-    horariosLocalSelect.addEventListener("change", () => verificarEstado(horariosLocalSelect.value, horarios, "local", estadoLocal));
-    horariosEnvioSelect.addEventListener("change", () => verificarEstado(horariosEnvioSelect.value, horarios, "envio", estadoEnvio));
+    verificarEstado(horarios, "local", estadoLocal);
+    verificarEstado(horarios, "envio", estadoEnvio);
 }
 
-function fillHorariosSelect(horarios, horariosLocalSelect, horariosEnvioSelect) {
-    const fragmentLocal = document.createDocumentFragment();
-    const fragmentEnvio = document.createDocumentFragment();
-    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    const diaActual = diasSemana[new Date().getDay()];
-
-    horarios.forEach(horario => {
-        const { dia, horarioLocal, horarioEnvio } = horario;
-
-        // Local
-        const optionLocal = document.createElement("option");
-        optionLocal.value = dia;
-        optionLocal.textContent = `${dia}: ${formatearHorario(horarioLocal)}`;
-        if (dia === diaActual) optionLocal.selected = true;
-        fragmentLocal.appendChild(optionLocal);
-
-        // Envío
-        const optionEnvio = document.createElement("option");
-        optionEnvio.value = dia;
-        optionEnvio.textContent = horarioEnvio ? `${dia}: ${formatearHorario(horarioEnvio)}` : `${dia}: No disponible`;
-        if (dia === diaActual) optionEnvio.selected = true;
-        fragmentEnvio.appendChild(optionEnvio);
-    });
-
-    horariosLocalSelect.appendChild(fragmentLocal);
-    horariosEnvioSelect.appendChild(fragmentEnvio);
-}
-
-function formatearHorario(horario) {
-    return `${horario.apertura} - ${horario.cierre}`;
-}
-
-function verificarEstado(dia, horarios, tipo, estadoElement) {
-    const horarioHoy = horarios.find(horario => horario.dia === dia);
+function verificarEstado(horarios, tipo, estadoElement) {
+    const diaActual = obtenerDiaActual();
+    const horarioHoy = horarios.find(horario => horario.dia === diaActual);
     if (!horarioHoy) return;
 
     const horario = tipo === "local" ? horarioHoy.horarioLocal : horarioHoy.horarioEnvio;
+
+    // Si el horario de local está cerrado
     if (!horario) {
-        estadoElement.textContent = tipo === "local" ? "Local cerrado" : "Envíos no disponibles";
-        estadoElement.className = "estado estado-cerrado";
+        if (tipo === "local") {
+            estadoElement.textContent = "Local cerrado";
+            estadoElement.className = "estado estado-cerrado";
+            mostrarModalCierre(horarios); // Mostrar modal de aviso de cierre
+        } else {
+            estadoElement.textContent = "Envíos no disponibles"; // Asegurarse de mostrar este texto
+            estadoElement.className = "estado estado-cerrado";
+        }
         return;
     }
 
@@ -153,6 +126,9 @@ function verificarEstado(dia, horarios, tipo, estadoElement) {
     } else {
         estadoElement.textContent = tipo === "local" ? "Local cerrado" : "No se realizan envíos";
         estadoElement.classList.add("estado-cerrado");
+        if (tipo === "local") {
+            mostrarModalCierre(horarios); // Mostrar modal de aviso de cierre para el local
+        }
     }
 }
 
@@ -161,4 +137,67 @@ function parseTime(timeString) {
     const date = new Date();
     date.setHours(hours, minutes, 0, 0);
     return date;
+}
+
+function obtenerDiaActual() {
+    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    return diasSemana[new Date().getDay()];
+}
+
+// Función para mostrar el modal con los horarios
+function mostrarModalHorarios(horarios) {
+    const tableRows = horarios.map(horario => `
+        <tr>
+            <td>${horario.dia}</td>
+            <td>${horario.horarioLocal ? `${horario.horarioLocal.apertura} - ${horario.horarioLocal.cierre}` : "Cerrado"}</td>
+            <td>${horario.horarioEnvio ? `${horario.horarioEnvio.apertura} - ${horario.horarioEnvio.cierre}` : "No disponible"}</td>
+        </tr>
+    `).join('');
+
+    const content = `
+        <table class="tabla-horarios">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Horario del Local</th>
+                    <th>Horario de Envíos</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${tableRows}
+            </tbody>
+        </table>
+    `;
+
+    const modalOptions = {
+        title: 'Horarios de Atención y Envíos',
+        content: content,
+        buttonText: 'Cerrar'
+    };
+
+    const modal = new Modal(modalOptions);
+    modal.createModal();
+}
+
+// Función para mostrar el modal de aviso de cierre
+function mostrarModalCierre(horarios) {
+    const content = `
+        <p>El local está cerrado y no se tomará el pedido en este momento.</p>
+        <p>Consulte los horarios de atención en la tabla de horarios.</p>
+        <button id="btn-consultar-horarios" class="btn-consultar-horarios">Consultar Horarios</button>
+    `;
+
+    const modalOptions = {
+        title: 'Local Cerrado',
+        content: content,
+        buttonText: 'Cerrar'
+    };
+
+    const modal = new Modal(modalOptions);
+    modal.createModal();
+
+    // Añadir evento al botón de consultar horarios
+    document.getElementById("btn-consultar-horarios").addEventListener("click", () => {
+        mostrarModalHorarios(horarios); // Mostrar la tabla de horarios
+    });
 }

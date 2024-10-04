@@ -4,6 +4,8 @@
 @import url(./product.css);
 @import url(./promos.css);
 
+@import url(./modal.css);
+
 :root {
   /* Paleta de colores */
   --bodybackgroundcolor: #f4f4f4;
